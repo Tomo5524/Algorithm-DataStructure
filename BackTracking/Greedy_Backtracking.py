@@ -12,6 +12,7 @@ def permutation(nums):
     3, Choice, slice array
 
 """
+    # time complexity O(n!)
     def dfs(nums, sub, res):
         # base case
         if not nums:
@@ -50,13 +51,14 @@ print(permutation(meow))
 
 # 78. Subsets
 
-def permutation(nums):
+def Subsets(nums):
     """
     algorithm
     1, Goal, base case will be based on for loop loop
     2, once there in no value in nums, it will be terminated
     3, Choice, slice array, slice i + 1 but sub gets nums[i]
     """
+    # time complexity O(n^2) exponential
     def dfs(nums, sub, res):
         # base case is for loop
         # as when there is no nums,it will terminate
@@ -73,6 +75,7 @@ def permutation(nums):
         res.append(sub)
         for i in range(len(nums)):
             dfs(nums[i+1:], sub+[nums[i]], res)
+
     res = []
     dfs(nums, [], res)
     return res
@@ -83,7 +86,7 @@ def permutation(nums):
     # return result
 
 meow = [1,2,3]
-print(permutation(meow))
+print(Subsets(meow))
 
 # 39. Combination Sum
 

@@ -1,6 +1,91 @@
 
 # collection of questions
+# 11/7/2019
 
+
+[[0,1],[1,0],[1,1]]
+[[0,0],[0,1],[1,0],[1,2],[2,1],[2,2]]
+[[0,0],[0,2],[1,1],[2,0],[2,2]]
+[[0, 0]]
+[[0,1],[1,0]]
+
+# 1188. Design Bounded Blocking Queue
+
+from collections import deque
+import threading
+class BoundedBlockingQueue():
+    def __init__(self, capacity):
+        self.queue = deque()
+        self.cur = 0
+        self.ept, self.ful = threading.Semaphore(0), threading.Semaphore(capacity)
+
+    def enqueue(self, element):
+        self.ful.acquire()
+        self.queue.appendleft(element)
+        self.cur += 1
+        self.ept.release()
+
+    def dequeue(self):
+        self.ept.acquire()
+        temp = self.queue.pop()
+        self.cur -= 1
+        self.ful.release()
+        return temp
+
+    def size(self):
+        return self.cur
+
+# from collections import deque
+# class BoundedBlockingQueue:
+#
+#     def __init__(self, capacity: int):
+#         self.capa = capacity
+#         self.q = deque([])
+#         self.waiting = deque([])
+#         self.waiting_F = False
+#         self.consumer_F = False
+#
+#     def enqueue(self, element: int) -> None:
+#         if self.consumer_F:
+#             self.consumer_F = False
+#             return element
+#
+#         if len(self.q) >= self.capa:
+#             self.waiting.append(element)
+#             self.waiting_F = True
+#
+#         else:
+#             self.q.append(element)
+#
+#         return ''
+#
+#     def dequeue(self) -> int:
+#
+#         if len(self.q):
+#             popped = self.q.popleft()
+#             if self.waiting_F:
+#                 self.q.append(self.waiting.popleft())
+#                 self.waiting_F = False
+#
+#             return popped
+#
+#         self.consumer_F = True
+#         return ''
+#
+#     def size(self) -> int:
+#         return len(self.q)
+
+queue = BoundedBlockingQueue(2) #;   // initialize the queue with capacity = 2.
+queue.enqueue(1)# ;   // The producer thread enqueues 1 to the queue.
+print(queue.dequeue())# ;    // The consumer thread calls dequeue and returns 1 from the queue.
+print(queue.dequeue())# ;    // Since the queue is empty, the consumer thread is blocked.
+print(queue.enqueue(0))# ;   // The producer thread enqueues 0 to the queue. The consumer thread is unblocked and returns 0 from the queue.
+print(queue.enqueue(2))# ;   // The producer thread enqueues 2 to the queue.
+print(queue.enqueue(3))# ;   // The producer thread enqueues 3 to the queue.
+print(queue.enqueue(4)  )# ;   // The producer thread is blocked because the queue's capacity (2) is reached.
+print(queue.dequeue())# ;    // The consumer thread returns 2 from the queue. The producer thread is unblocked and enqueues 4 to the queue.
+print(queue.size())# ;
+print()
 
 # 11/3/2019
 # 1055. Shortest Way to Form String

@@ -266,7 +266,7 @@ def gameOfLife(board):
     """
     qlgorithm
     key is in O(1) space solution, if we update board, when 0 will turn into 1, that will mess up the board
-    so make turn cell that will die into -1 and turn cell that will be alive into 2
+    so turn cell that will die into -1 and turn cell that will be alive into 2
     1, create 8 directions, vertically, horizontally, diagonally
     2, visit each cell, so we dont need any hashset to keep track of visited cells
     3, bfs from each cell so we know how many will die and become alive
@@ -342,10 +342,9 @@ def riverSizes(matrix):
     for row in range(len(matrix)):
         for col in range(len(matrix[row])):
             if matrix[row][col] == 1:
-                if matrix[row][col] == 1:
-                    num_rivers = dfs(matrix, row, col)
-                    if num_rivers:  # if it is greater than 0
-                        res.append(num_rivers)
+                num_rivers = dfs(matrix, row, col)
+                if num_rivers:  # if it is greater than 0
+                    res.append(num_rivers)
 
     return res
 
