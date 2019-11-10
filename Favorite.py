@@ -1,13 +1,64 @@
 
 # collection of questions
-# 11/7/2019
 
+# 11/9/2019
+# 947. Most Stones Removed with Same Row or Column
 
-[[0,1],[1,0],[1,1]]
-[[0,0],[0,1],[1,0],[1,2],[2,1],[2,2]]
-[[0,0],[0,2],[1,1],[2,0],[2,2]]
-[[0, 0]]
-[[0,1],[1,0]]
+from collections import defaultdict
+def removeStones(stones):
+
+    # time complexity is O(V+E)
+    """
+    key is The key point is here, we define an island as number of points that are connected by row or column.
+    how to create map is the key
+    algorithm
+    1, create dictionary for row and col
+    2, what we want to return is the islands that are connected by row and column
+    3, length of stones - islands is the answer
+    4, how to move from current cell to another is the key
+    5, row only moves horizontally and col moves vertically
+    e,g, [[0,0],[0,2],[1,1],[2,0],[2,2]], 0,0 -> 0,2 by row -> 2,2 by col -> 2,0 by row
+    """
+    def dfs(i, j):
+        visited.add((i, j))
+        # move horizontally
+        for r in row[i]:
+            if (i, r) not in visited:
+                dfs(i, r)
+
+        # move vertically
+        for c in col[j]:
+            if (c, j) not in visited:
+                dfs(c, j)
+
+    row = defaultdict(list)
+    col = defaultdict(list)
+    for x, y in stones:
+        row[x].append(y)
+        col[y].append(x)
+
+    visited = set()
+    cnt = 0
+    for i, j in stones:
+        if (i, j) not in visited:
+            dfs(i, j)
+            cnt += 1
+
+    return len(stones) - cnt
+
+test = [[0,1],[1,0],[1,1]]
+test1 = [[0,0],[0,1],[1,0],[1,2],[2,1],[2,2]]
+test2 = [[0,0],[0,2],[1,1],[2,0],[2,2]]
+test3 = [[0, 0]]
+test4 = [[0,1],[1,0]]
+
+# print(removeStones(test))
+print(removeStones(test1))
+print(removeStones(test2))
+print(removeStones(test3))
+print(removeStones(test4))
+print()
+
 
 # 1188. Design Bounded Blocking Queue
 
@@ -77,14 +128,14 @@ class BoundedBlockingQueue():
 
 queue = BoundedBlockingQueue(2) #;   // initialize the queue with capacity = 2.
 queue.enqueue(1)# ;   // The producer thread enqueues 1 to the queue.
-print(queue.dequeue())# ;    // The consumer thread calls dequeue and returns 1 from the queue.
-print(queue.dequeue())# ;    // Since the queue is empty, the consumer thread is blocked.
-print(queue.enqueue(0))# ;   // The producer thread enqueues 0 to the queue. The consumer thread is unblocked and returns 0 from the queue.
-print(queue.enqueue(2))# ;   // The producer thread enqueues 2 to the queue.
-print(queue.enqueue(3))# ;   // The producer thread enqueues 3 to the queue.
-print(queue.enqueue(4)  )# ;   // The producer thread is blocked because the queue's capacity (2) is reached.
-print(queue.dequeue())# ;    // The consumer thread returns 2 from the queue. The producer thread is unblocked and enqueues 4 to the queue.
-print(queue.size())# ;
+# print(queue.dequeue())# ;    // The consumer thread calls dequeue and returns 1 from the queue.
+# print(queue.dequeue())# ;    // Since the queue is empty, the consumer thread is blocked.
+# print(queue.enqueue(0))# ;   // The producer thread enqueues 0 to the queue. The consumer thread is unblocked and returns 0 from the queue.
+# print(queue.enqueue(2))# ;   // The producer thread enqueues 2 to the queue.
+# print(queue.enqueue(3))# ;   // The producer thread enqueues 3 to the queue.
+# print(queue.enqueue(4)  )# ;   // The producer thread is blocked because the queue's capacity (2) is reached.
+# print(queue.dequeue())# ;    // The consumer thread returns 2 from the queue. The producer thread is unblocked and enqueues 4 to the queue.
+# print(queue.size())# ;
 print()
 
 # 11/3/2019
