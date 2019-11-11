@@ -1,6 +1,48 @@
 
 # collection of questions
 
+# 11/10/2019
+# 939. Minimum Area Rectangle
+
+def minAreaRect(points):
+    min_area = float("inf")
+    points_table = set()
+
+    for x, y in points:
+        points_table.add((x, y))
+
+    for x1, y1 in points:
+        for x2, y2 in points:
+
+            # Skip looking at same point
+            # make sure if current coordinate is valid or not
+            if x1 > x2 and y1 > y2:
+                # passing this if means x1,y1 x2,y2 are valid
+                # e,g, test2 1,3 and 3,4
+
+                # now we check all 4 coordinates
+                # x1,y2 checks upper right, x2,y1 checks upper left
+                # if x1,y2 and x2,y1 are in points table, they are valid
+                if (x1, y2) in points_table and (x2, y1) in points_table:
+                    # now we will find out area of rectangle
+                    area = abs(x1 - x2) * abs(y1 - y2)
+                    if area:
+                        min_area = min(area, min_area)
+
+    return 0 if min_area == float('inf') else min_area
+
+
+test = [[0, 1], [1, 3], [3, 3], [4, 4], [1, 4], [2, 3], [1, 0], [3, 4]] # 2
+test1 = [[1,1],[1,3],[3,1],[3,3],[2,2]] # 4
+test2 = [[1,1],[1,3],[3,1],[3,3],[4,1],[4,3]] # 2
+
+print(minAreaRect(test))
+print(minAreaRect(test1))
+print(minAreaRect(test2))
+
+# [[0,1],[1,3],[3,3],[4,4],[1,4],[2,3],[1,0],[3,4]]
+#
+
 # 11/9/2019
 # 947. Most Stones Removed with Same Row or Column
 

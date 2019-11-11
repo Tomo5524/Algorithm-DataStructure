@@ -1,6 +1,38 @@
 # LeetCode Tree
 from tree_library import Node,inorder,levelOrder
 
+# 11/10/2019
+def invertTree(root):
+    """
+    algorithm
+    1, key is to flip children of current node
+    2, so create current node and flip children by NewNode.left gets current node.right
+         and NewNode.right gets current node.left
+    3,
+    """
+
+    # base case
+    if not root:
+        return
+
+    new_tree = Node(root.val)
+
+    new_tree.left = invertTree(root.right)
+    new_tree.right = invertTree(root.left)
+
+    return new_tree
+
+root = Node(4)
+root.left = Node(2)
+root.left.left = Node(1)
+root.left.right = Node(3)
+root.right = Node(7)
+root.right.left = Node(6)
+root.right.right = Node(9)
+#[[4], [7, 2], [9, 6, 3, 1]]
+print(levelOrder(invertTree(root)))
+print()
+
 # 11/7/2019
 
 # 951. Flip Equivalent Binary Trees

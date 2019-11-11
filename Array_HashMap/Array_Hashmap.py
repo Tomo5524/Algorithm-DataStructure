@@ -64,3 +64,37 @@ print(subarraySum(num2,k2))
 print(subarraySum(num3,k3))
 print(subarraySum(num4,k4))
 print(subarraySum(num5,k5))
+
+
+def missingNumber(nums):
+    # nums.sort()
+    # nums_set = set(nums)
+    # for i in range(len(nums)+1):
+    #     if i not in nums_set:
+    #         return i
+    n = len(nums)
+
+    # get the sum which is suppoused to be the sum
+    expected_sum = n * (n + 1) // 2
+    # given sum
+    actual_sum = sum(nums)
+    return expected_sum - actual_sum
+
+
+# 448. Find All Numbers Disappeared in an Array
+def findDisappearedNumbers(nums):
+
+    dic = {}
+    res = []
+    for num in nums:
+        if num not in dic:
+            dic[num] = 1
+
+    for i in range(1, len(nums) + 1):
+        if i not in dic:
+            res.append(i)
+
+    return res
+
+[4,3,2,7,8,2,3,1]
+[1,1]
