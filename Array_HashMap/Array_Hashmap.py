@@ -1,4 +1,62 @@
 
+# 11/11/2019
+
+def minMoves(nums):
+
+    # optimal solution
+    return sum(nums) - len(nums)*min(nums)
+
+    # brute force
+    # time complexity O(nlogn)
+    """
+    1, Visualize the nums array as a bar graph where the value at each index is a bar of height nums[i].
+        Sort the array such that the bar at index 0 is minimum height and the bar at index N-1 is highest.
+    2, Now in the first iteration, make a sequence of moves such that the height at index 0 is equal to height at index N-1.
+        Clearly this takes nums[N-1]-nums[0] moves. After these moves, index N-2 will be the highest and index 0 will still be the minimum and nums[0] will be same as nums[N-1].
+    3, In the next iteration, lets do nums[N-2]-nums[0] moves.
+        After this iteration, nums[0], nums[N-2], and nums[N-1] will be the same.
+
+    it is basically dp, each iteration, we will solve sub problem,
+    e,g, [1,2] we just need 1 move to make 1 and 2 same
+         [1,3] we just need 2 moves to make 1 and 3 same
+         [1,4] we just need 3 moves to make 1 and 4 same
+         and so on...
+    """
+    nums.sort()
+    cnt = 0
+    for i in range(len(nums)):
+        cnt += nums[i] - nums[0]
+
+    return cnt
+
+    # brute force
+    # time complexity O(n2)
+    # each iteration, find minimum value and max value,
+    # increment all the values other than max_value by 1
+    # and when mini value becomes same as max_value, return counter
+    # be careful with duplicates
+    cnt = 0
+    while True:
+        min_val,max_val = min(nums),max(nums)
+        if max_val == min_val:
+            break
+
+        # for duplicates
+        loc = nums.index(max_val)
+        for i in range(len(nums)):
+            if i != loc:
+                nums[i] +=1
+
+        cnt+=1
+
+    return cnt
+
+test = [1,2,3]
+test1 = [4,6,2,7,8,5,3,1]
+print(minMoves(test))
+print(minMoves(test1))
+print()
+
 from collections import defaultdict
 def subarraySum(nums,k):
 
@@ -84,14 +142,14 @@ def missingNumber(nums):
 # 448. Find All Numbers Disappeared in an Array
 def findDisappearedNumbers(nums):
 
-    dic = {}
+    seen = set()
     res = []
     for num in nums:
-        if num not in dic:
-            dic[num] = 1
+        if num not in seen:
+            seen.add(num)
 
     for i in range(1, len(nums) + 1):
-        if i not in dic:
+        if i not in seen:
             res.append(i)
 
     return res
