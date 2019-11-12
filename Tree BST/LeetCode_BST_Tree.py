@@ -1,6 +1,82 @@
 # LeetCode Tree
 from tree_library import Node,inorder,levelOrder
 
+# 11/11/2019
+
+def isSymmetric(root):
+    """
+    algorithm,
+    1, create 2 roots that check left subtree and right subtree
+    2, if there is no node, is it symmetric
+    3, if one of nodes is none or nodes value are not same, it is invalid
+
+    """
+    def dfs(r1, r2):
+
+        if not r1 and not r2:
+            return True
+
+        if not r1 or not r2 or r1.val != r2.val:
+            return False
+
+        return dfs(r1.left, r2.right) and dfs(r1.right, r2.left)
+
+    if not root:
+        return True
+    r1 = root
+    r2 = root
+    if dfs(r1.left, r2.right):
+        return True
+
+    return False
+
+root = Node(1)
+root.left = Node(2)
+root.left.left = Node(3)
+root.left.right = Node(4)
+root.right = Node(2)
+root.right.left = Node(4)
+root.right.right = Node(3)
+print(isSymmetric(root))
+print()
+
+# 543. Diameter of Binary Tree
+class Diamiter:
+    def diameterOfBinaryTree(self, root):
+        """
+        basically it is max path without value
+        so every node keeps track its longest path
+        and return it
+        """
+        def dfs(root):
+            if not root:
+                return 0
+
+            left = dfs(root.left)
+            right = dfs(root.right)
+
+            # alwasy check if local longest path is greter than global path
+            self.res = max(self.res, left + right)
+
+            # when hits leaf, incremetn by 1
+            # every node keeps track of local longest path
+            return 1 + max(left, right)
+
+        self.res = 0
+        dfs(root)
+        return self.res
+
+d = Diamiter()
+root = Node(1)
+root.left = Node(2)
+root.left.left = Node(3)
+root.left.right = Node(5)
+root.right = Node(2)
+root.right.left = Node(6)
+root.right.right = Node(9)
+print(d.diameterOfBinaryTree(root))
+print()
+
 # 11/10/2019
 def invertTree(root):
     """
@@ -968,8 +1044,6 @@ def buildTree(preorder, inorder):
 
     return helper(deque(preorder), 0, len(preorder)-1)
 
-
-
 meow = [3, 9, 20, 15, 7]
 meow1 = [9, 3, 15, 20, 7]
 meow2 = [1,2,3]
@@ -987,7 +1061,6 @@ print(levelOrder(buildTree(meow2, meow3)))
     2, iterate each node and keep track of sub tree sum and max path
         because when subtree is bigger than max path, it will update 
     3,
-
 """
 class MAXPATH:
     def maxPathSum(self,root):
@@ -1011,12 +1084,9 @@ class MAXPATH:
             # not return the sum of subtree as a whole cuz  A path is a connection between any two nodes, maybe a single node to.
             return max(left + root.val, right + root.val, root.val)
 
-
         self.max_path = float("-inf")
         find_max_path(root)
         return self.max_path
-
-
 
 s = MAXPATH()
 root = Node(10)
