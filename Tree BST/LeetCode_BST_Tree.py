@@ -1,8 +1,92 @@
 # LeetCode Tree
 from tree_library import Node,inorder,levelOrder
 
-# 11/11/2019
+# 11/13/2019
+class findPath:
 
+    # time complexity, O(n)
+    def pathSum(self, root, Sum):
+    # define global result and path
+
+        def dfs(root, t, cur_path):
+            if not root:
+                return
+
+            # it is basically 2 sum
+            # if old_path is in dic, get its value
+            cur_path += root.val
+            old_path = cur_path - t
+            if old_path in cache:
+                self.cnt += cache[old_path]
+                # self.cnt += 1
+                # this will be
+            cache[cur_path] = cache.get(cur_path, 0) + 1
+
+            dfs(root.left, t, cur_path)
+            dfs(root.right, t, cur_path)
+            # without this, test2 will fail
+            cache[cur_path] -= 1
+
+        # 0,1 needs it when cur_path - sum is 0
+        cache = {0: 1}
+        self.cnt = 0
+        dfs(root, Sum, 0)
+        return self.cnt
+
+    # brute force
+    """
+    algoirhtm,
+    1, traverse tree with 2 layers
+    2, creaate global counter
+    """
+    def pathSum(self,root, Sum):
+        self.cnt = 0
+        self.dfs(root, Sum)
+        return self.cnt
+
+    def dfs(self,root, Sum):
+        # 1st layer of dfs
+
+        if not root:
+            return 0
+
+        self.getpath(root, Sum)
+        self.dfs(root.left, Sum)
+        self.dfs(root.right, Sum)
+
+    def getpath(self,root,Sum):
+        # second layer of dfs
+        # sum will not inherit any values
+        # so node.left(5) can get 2 paths
+        if not root:
+            return 0
+
+        Sum -= root.val
+        if Sum == 0:
+            self.cnt += 1
+
+        self.getpath(root.left, Sum)
+        self.getpath(root.right, Sum)
+
+f = findPath()
+root = Node(10)
+root.left = Node(5)
+root.left.left = Node(3)
+root.left.left.left = Node(3)
+root.left.left.right = Node(-2)
+root.left.right = Node(2)
+root.left.right.right = Node(1)
+root.right = Node(-3)
+root.right.right = Node(11)
+print(f.pathSum(root,8))
+f1 = findPath()
+root = Node(1)
+root.left = Node(-2)
+root.right = Node(-3)
+print(f1.pathSum(root,-1))
+print()
+
+# 11/11/2019
 def isSymmetric(root):
     """
     algorithm,
@@ -29,6 +113,8 @@ def isSymmetric(root):
         return True
 
     return False
+
+
 
 root = Node(1)
 root.left = Node(2)

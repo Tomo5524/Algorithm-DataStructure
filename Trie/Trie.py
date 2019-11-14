@@ -1,59 +1,68 @@
 # Leetcode
 
 # 11/11/2019
-# 11/11/2019
 # 1032. Stream of Characters
 class StreamChecker:
-
     def __init__(self, words):
-        self.words = words
-        self.dic = {}
+        self.waiting = []
+        self.trie = Trie()
+        # how to access another class
+        # build trie
+        for word in words:
+            self.trie.insert(word[::-1])
+            # you can access another like this but get an error
+            # 'Trie' object has no attribute 'children'
+            #Trie().insert(word[::-1])
 
     def query(self, letter):
-        # problem is dic gets too many counters in test 1
-        for w in self.words:
-            for ch in w:
-                if letter == ch:
-                    if letter not in self.dic:
-                        self.dic[ch] = 1
-
-                    else:
-                        self.dic[ch] += 1
-
-        if self.match():
-            return True
-
-        return False
-
-    def match(self):
-
-        for w in self.words:
-            ans = ''
-            for ch in w:
-                if ch in self.dic and self.dic[ch] > 0:
-                    ans += ch
-
-            if ans == w:
-                for c in ans:
-                    self.dic[c] -= 1
+        self.waiting.append(letter)
+        # how to start from root
+        # this is how
+        node = self.trie.root
+        i = len(self.waiting) - 1
+        while i > -1:
+            cur_word = self.waiting[i]
+            if node.isEnd:
                 return True
+            if cur_word not in node.children:
+                return False
+
+            node = node.children[cur_word]
+            i -= 1
 
         return False
+
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.isEnd = False
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
+    def insert(self,word):
+        node = self.root
+        for letter in word:
+            if letter not in node.children:
+                node.children[letter] = TrieNode()
+            node = node.children[letter]
+        node.isEnd = True
 
 test = ["cd","f","kl"]
 streamChecker = StreamChecker(test)
-print(streamChecker.query('a'))# // return false
-print(streamChecker.query('b'))# // return false
-print(streamChecker.query('c'))# // return false
-print(streamChecker.query('d'))# // return true, because 'cd' is in the wordlist
-print(streamChecker.query('e'))# // return false
-print(streamChecker.query('f'))# // return true, because 'f' is in the wordlist
-print(streamChecker.query('g'))# // return false
-print(streamChecker.query('h'))# // return false
-print(streamChecker.query('i'))# // return false
-print(streamChecker.query('j'))# // return false
-print(streamChecker.query('k'))# // return false
-print(streamChecker.query('l'))# return true
+# print(streamChecker.query('a'))# // return false
+# print(streamChecker.query('b'))# // return false
+# print(streamChecker.query('c'))# // return false
+# print(streamChecker.query('d'))# // return true, because 'cd' is in the wordlist
+# print(streamChecker.query('e'))# // return false
+# print(streamChecker.query('f'))# // return true, because 'f' is in the wordlist
+# print(streamChecker.query('g'))# // return false
+# print(streamChecker.query('h'))# // return false
+# print(streamChecker.query('i'))# // return false
+# print(streamChecker.query('j'))# // return false
+# print(streamChecker.query('k'))# // return false
+# print(streamChecker.query('l'))# return true
 print()
 
 # ["StreamChecker","query","query","query","query","query","query","query","query","query","query","query","query","query","query","query","query","query","query","query","query","query","query","query","query","query","query","query","query","query","query"]

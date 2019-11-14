@@ -1,6 +1,43 @@
 from Linkedlist_node_library import Node,convert_to_list,reverse
 from collections import deque
 
+# 234. Palindrome Linked List
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def isPalindrome(self):
+        """
+        key is to get middle value
+        algorithm
+        1, create fast and slow pointers to get middle point
+        2, reverse from middle to the end
+        3, get current that points to the front and compare second half and current
+        """
+        fast = slow = self.head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+
+        # this slow reverse from middle to the end
+        second_half = reverse(slow)
+        cur = self.head
+        while second_half:
+            if cur.val != second_half.val:
+                return False
+
+            cur = cur.next
+            second_half = second_half.next
+
+        return True
+
+llist = LinkedList()
+llist.head = Node(1)
+llist.head.next = Node(2)
+llist.head.next.next = Node(2)
+llist.head.next.next.next = Node(1)
+print(llist.isPalindrome())
+
 # 109. Convert Sorted List to Binary Search Tree
         
 class TreeNode:
@@ -154,11 +191,11 @@ llist8.head.next = Node(9)
 llist9.head = Node(1) # [1,0,0]
 
 
-print(llist.AddTwoNumbers(llist1))
-print(llist2.AddTwoNumbers(llist3))
-print(llist4.AddTwoNumbers(llist5))
-print(llist6.AddTwoNumbers(llist7))
-print(llist8.AddTwoNumbers(llist9))
+# print(llist.AddTwoNumbers(llist1))
+# print(llist2.AddTwoNumbers(llist3))
+# print(llist4.AddTwoNumbers(llist5))
+# print(llist6.AddTwoNumbers(llist7))
+# print(llist8.AddTwoNumbers(llist9))
 
 
 # 82. Remove Duplicates from Sorted List II

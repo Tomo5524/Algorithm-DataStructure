@@ -16,35 +16,35 @@ def convert_to_list(head):
         cur = cur.next
     return res
 
-##def reverse(head):
-##    res = []
-##    prev = None
-##    while head:
-##        next_node = head.next
-##        head.next = prev
-##        prev = head
-##        head = next_node
-##
-##    return prev
-
 def reverse(head):
-#def recursion_reverse(head):
-    """ algorithm
-        1, iterate all the way down, stop at the last val by 'if head.next'
-        2, pointer points to itself by head.next.next = head
-        3, kill hea
+   res = []
+   prev = None
+   while head:
+       next_node = head.next
+       head.next = prev
+       prev = head
+       head = next_node
 
-"""
+   return prev
 
-    # base case
-    if not head or not head.next:
-        return head
-
-    node = reverse(head.next)
-    head.next.next = node
-    head.next = None
-
-    return node
+# def reverse(head):
+# #def recursion_reverse(head):
+#     """ algorithm
+#         1, iterate all the way down, stop at the last val by 'if head.next'
+#         2, pointer points to itself by head.next.next = head
+#         3, kill hea
+#
+# """
+#
+#     # base case
+#     if not head or not head.next:
+#         return head
+#
+#     node = reverse(head.next)
+#     head.next.next = node
+#     head.next = None
+#
+#     return node
     
 
     

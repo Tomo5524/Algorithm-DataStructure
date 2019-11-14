@@ -1,4 +1,64 @@
 
+# 11/13/2019
+# 581. Shortest Unsorted Continuous Subarray
+def findUnsortedSubarray(nums):
+    """
+    algorithm
+    1, we have two pointer that finds first non-increasing, l, and first non-descending, r in array
+    2, but any numbers outside could be violating and they should be included to the answer
+    3,
+    """
+
+    l,r = 0,len(nums)-1
+    # get first non-increasing and non-decreasing
+    while l < len(nums)-1 and nums[l] <= nums[l+1]:
+        l += 1
+
+    while r > 0 and nums[r-1] <= nums[r]:
+        r -= 1
+
+    # if array is already sorted, return 0
+    #  # [1,2,3,4]
+    # l will be bigger
+    if l > r:
+        return 0
+
+    temp = nums[l:r+1]
+    smallest = min(temp)
+    biggest = max(temp)
+
+    # check any numbers outside temp
+    # [1, 3, 7, 2, 5, 4, 6, 10]
+    #  decrement l value until we find something that is lower than minimum.
+    while l > 0 and nums[l-1] > smallest:
+        l -= 1
+
+    # len(nums) -1 for [1,2]
+    # increment r value until we find something that is greater than maximum.
+    while r < len(nums) -1 and nums[r+1] < biggest:
+        r += 1
+
+    return (r - l) +1
+
+test = [1, 3, 7, 2, 5, 4, 6, 10]
+test1 = [1,2,3,4] # 0
+test2 = [2,1] # 2
+test3 = [2,6,4,8,10,15] # 2
+test4 = [1,3,2,2,2] # 2
+test5 = [1,3,2,3,3] # 4
+test6 = [1,2,3,3,3] # 0
+test7 = [2, 6, 4, 8, 10, 9, 15] # 5
+print(findUnsortedSubarray(test))
+print(findUnsortedSubarray(test1))
+print(findUnsortedSubarray(test2))
+print(findUnsortedSubarray(test3))
+print(findUnsortedSubarray(test4))
+print(findUnsortedSubarray(test5))
+print(findUnsortedSubarray(test6))
+print(findUnsortedSubarray(test7))
+print()
+
+
 # 11/11/2019
 
 def minMoves(nums):
