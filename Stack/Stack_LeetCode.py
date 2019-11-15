@@ -1,5 +1,68 @@
 #Stack LeetCode
 
+# 11/14/2019
+
+# 739. Daily Temperatures
+def dailyTemperatures(T):
+
+    # optimized solution
+    """
+    algorithm
+    1, loop in descending order because we are trying to find the next occurrence of a warmer temperature
+        so we just need to remember previous numbers
+    2, create stack and put index into stack
+    3, if we see smaller value than the value on the top of stack,
+        we want to find the distance between warmer value(top stack) and current temperature
+    """
+    stack = []
+    res = [0] * len(T)
+    for i in range(len(T)-1,-1,-1):
+        # if stack exists and top stack is smaller than current temperature, pop the previous
+        # so current warmest tempearture will be on top of stack
+        # duplicates mean it is not warmer so should update stack when running into duplicates
+        while stack and T[stack[-1]] <= T[i]:
+            stack.pop()
+
+        # if stack exists, meaning, we still have the warmest temperature so sar
+        # so update result
+        if stack:
+            res[i] = stack[-1] - i
+
+        #  We'll keep a stack of indices
+        stack.append(i)
+
+    return res
+
+    # brute force
+    """
+    check each value and find out shortest distance between current value and any value greater than that
+    """
+    res = []
+    for i in range(len(T)):
+        cur_lowest = float("inf")
+        for j in range(i,len(T)):
+            if T[i] < T[j]:
+                cur_lowest = min(cur_lowest,j-i)
+
+        if cur_lowest != float('inf'):
+            res.append(cur_lowest)
+
+        # if cur_val is the largest, get 0
+        else:
+            res.append(0)
+
+    return res
+
+
+print(dailyTemperatures([89,62,70,58,47,47,46,76,100,70])) # [8, 1, 5, 4, 3, 2, 1, 1, 0, 0]
+print(dailyTemperatures([73, 74, 75, 71, 69, 72, 76, 73])) # [1, 1, 4, 2, 1, 1, 0, 0]
+print(dailyTemperatures([1,1,2,2,3,3])) # [2, 1, 2, 1, 0, 0]
+print(dailyTemperatures([5,4,2,1,3,6])) # [5, 4, 2, 1, 1, 0]
+print(dailyTemperatures([9,5,4,2,1,3,6])) # [0, 5, 4, 2, 1, 1, 0]
+print()
+
+
+
 # 10/27/2019
 
 # 239. Sliding Window Maximum

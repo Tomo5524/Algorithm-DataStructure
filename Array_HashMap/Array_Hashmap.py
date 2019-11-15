@@ -1,4 +1,103 @@
 
+
+
+# 11/14/2019
+def threeSum(nums):
+
+    # optimal solution
+    """
+    key is how to skip duplicates
+    algorithm
+    1, sort the array first
+    2, create left and right pointer
+    3, add up current, left and right values and if target is 0, append 3 values
+    """
+    nums.sort()
+    res = []
+    for i in range(len(nums)):
+        # if current value is greater than 0, it will not be 0
+        if nums[i] > 0: break
+
+        # i > 0 for [0,0,0]
+        if i > 0 and nums[i-1] == nums[i]:
+            continue
+
+        # We always start the left pointer from i+1 because the combination of 0~i has already been tried. [2]
+        l = i+1
+        r = len(nums)-1
+        while l < r:
+            cur_total = nums[i] + nums[l] + nums[r]
+
+            # #[1,-1,-1,0]
+            #If the total is less than zero, we need it to be larger, so we move the left pointer.
+            if cur_total < 0:
+                l +=1
+            # If the total is greater than zero, we need it to be smaller, so we move the right pointer. [4]
+            elif cur_total > 0:
+                r -= 1
+
+            else:
+                res.append([nums[i],nums[l],nums[r]])
+                # skip duplicates
+                while l < r and nums[l] == nums[l+1]:
+                    l +=1
+
+                while r > 0 and nums[r] == nums[r-1]:
+                    r -=1
+                # these while loops stop at the end of duplicates
+
+                # update left and right when target is 0
+                l +=1
+                r-= 1
+
+    return res
+
+    # time complexity O(n3) power
+    # brute force
+    res = []
+    seen = set()
+    for i in range(len(nums)):
+        for j in range(i+1,len(nums)):
+            for k in range(j+1,len(nums)):
+                if (nums[i] + nums[j] + nums[k]) == 0:
+                    if tuple(sorted([nums[i], nums[j], nums[k]])) not in seen:
+                        res.append([nums[i],nums[j],nums[k]])
+                        seen.add(tuple(sorted([nums[i], nums[j], nums[k]])))
+
+    return res
+
+
+# print(threeSum([0,0,0,0]))
+# print(threeSum([0,0,0]))
+print(threeSum([-1, 0, 1, 2, -1, -4]))
+print(threeSum([-2,0,1,1,2]))
+print(threeSum([1,-1,-1,0]))
+print(threeSum([-2,0,0,2,2]))
+print()
+[[0, 0, 0]]
+[[0, 0, 0]]
+[[-1, 0, 1], [-1, 2, -1]]
+[[-2, 0, 2], [-2, 1, 1]]
+[[1, -1, 0]]
+[[-2, 0, 2]]
+
+def generate(numRows):
+    if numRows == 0:
+        return None
+
+    # res = [1] # [1, [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1]]
+    res = [[1]]
+    for i in range(2, numRows + 1):
+        cur_level = [1] * i
+        for j in range(1, len(cur_level) - 1):
+            cur_level[j] = res[-1][j] + res[-1][j - 1]
+
+        res.append(cur_level)
+
+    return res
+
+print(generate(5))
+
 # 11/13/2019
 # 581. Shortest Unsorted Continuous Subarray
 def findUnsortedSubarray(nums):
