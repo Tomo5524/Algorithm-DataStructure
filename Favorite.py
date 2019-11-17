@@ -1,5 +1,67 @@
 
 # collection of questions
+from collections import defaultdict
+import heapq
+def minCostToSupplyWater(n, wells, pipes):
+    """
+    key is to create right graph and use prim algorithm
+    be aware of the diffreence between prim and dikstra
+    algorithm
+    1, create undirected(bidirectional) graph,
+    2, wells themselves can be pipe so create heap with wells as they can be potential answers
+        in test cast 3, all the houses will get wells
+    3, and do prim
+    """
+    g = defaultdict(list)
+    for u,v,c in pipes:
+        g[u].append((v,c))
+        g[v].append((u,c))
+
+    heap = [(wells[i],i+1) for i in range(len(wells))]
+    # heap = []
+    # for i in range(len(wells)):
+    #     heap.append((wells[i],i+1))
+
+    # hepify O(n)
+    # without heapify, we cannnot start off with the smallest well
+    # and fail test 2
+    heapq.heapify(heap)
+    visited = set()
+    res = 0
+    # keep visiting until we visit all the nodes
+    while len(visited) < n:
+
+        cost,src = heapq.heappop(heap)
+        # if current node is not visited yet, add it to visited
+        # along with adding up current cost and accumulative cost
+        if src not in visited:
+            res += cost
+            visited.add(src)
+
+            # visit edges of current node
+            for edge,c in g[src]:
+                # dont add up cost as we are tyring to figure out the smallest path from current node to neighbours
+                heapq.heappush(heap,(c,edge))
+
+    return res
+
+n = 3
+wells = [1, 2, 2]
+pipes = [[1, 2, 1], [2, 3, 1]]
+# print(minCostToSupplyWater(n, wells, pipes)) # 3
+n1 = 5
+wells1 = [46012,72474,64965,751,33304]
+pipes1 = [[2,1,6719],[3,2,75312],[5,3,44918]]
+# print(minCostToSupplyWater(n1, wells1, pipes1)) # 131704
+n2 = 9
+wells2 = [58732,77988,55446,79246,8265,30789,39905,79968,61679]
+pipes2 = [[2,1,45475],[3,2,41579],[4,1,79418],[5,2,17589],[7,5,4371],[8,5,82103],[9,7,55500]]
+# print(minCostToSupplyWater(n2, wells2, pipes2)) # 362782
+n3 = 3
+wells3 = [1, 2, 2]
+pipes3 = [[1, 2, 1000], [2, 3, 2221]]
+print(minCostToSupplyWater(n3, wells3, pipes3)) # 5
+print()
 
 # 11/10/2019
 # 939. Minimum Area Rectangle

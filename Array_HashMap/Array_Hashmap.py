@@ -1,5 +1,32 @@
 
 # 11/16/2019
+# 238. Product of Array Except Self
+def product(arr):
+    """
+    algorithm
+    Instead of dividing the product of all the numbers in the array by the number at a given index to get the corresponding product,
+    we can make use of the product of all the numbers to the left and all the numbers to the right of the index.
+    Multiplying these two individual products would give us the desired result as well.
+    """
+
+    res = []
+    l,r,ans = [1]*len(arr),[1]*len(arr),[1]*len(arr)
+    for i in range(1,len(l)):
+        l[i] = l[i-1] * arr[i-1]
+
+    for j in range(len(arr)-2,-1,-1):
+        r[j] = r[j+1]*arr[j+1]
+
+    for i in range(len(ans)):
+        ans[i] = l[i] *r[i]
+
+    return ans
+
+arr = [1, 2, 3, 4]
+# [1,1,2,6]
+print(product(arr))
+print()
+
 from collections import deque
 class NestedIterator:
     def __init__(self, nestedList):
