@@ -1,7 +1,195 @@
 
+# 11/16/2019
+from collections import deque
+class NestedIterator:
+    def __init__(self, nestedList):
+        self.stack = deque([])
+        self.stack.append(nestedList)
+        self.value = None
 
+    def next(self):
+        temp = self.value
+        self.value = None
+        return temp
+
+    def hasNext(self):
+        stack = self.stack
+        while stack:
+            # get top of stack
+            # be careful with index
+            top = stack.popleft()
+            if len(top) == 1:
+                # # check if value on top is integer r not
+                if type(top[0]) == int:
+                    self.value = top[0]
+                    return True
+
+                # if current list is nested, flatten it
+                # be carful with how to flatten it
+                else:
+                    stack.appendleft(top[0])
+
+            # if top is greater than 1, create nested list for each list
+            # should reverse it, edge case for [1,[4,[6]]]
+            else:
+                for li in reversed(top):
+                    stack.appendleft([li])
+
+        return False
+
+
+test = [[1,1],2,[1,1]]
+test1 = [1,[4,[6]]]
+i, v = NestedIterator(test), []
+res_ = []
+res_1 = []
+while i.hasNext(): res_.append(i.next())
+print(res_)
+
+i, v = NestedIterator(test1), []
+while i.hasNext(): res_1.append(i.next())
+print(res_1)
+print()
+
+# 11/15/2019
+
+# 647. Palindromic Substrings
+def countSubstrings(s):
+
+    #optimal solution
+    """
+    algorithm
+    1, If looking down to the assignment of left and right, for example a string of length 4, it will be:
+        left 0, right 0 (right = left + 0)
+        left 0, right 1 (right = left + 1)
+        left 1, right 1 (right = left + 0)
+        left 1, right 2 (right = left + 1)
+        left 2, right 2 (right = left + 0)
+        left 2, right 3 (right = left + 1)
+        left 3, right 3 (right = left + 0) # your code stops here
+        left 3, right 4 (right = left + 1) # this is additional if written in my way showed below, but it is still safe
+    2, if there is a match we expand search by decrementing left and incrementing right
+    3, basically left is iterated in range(0, len(s)), and right is either left + 0 or left + 1
+    """
+
+    res = 0
+    for i in range(len(s)):
+        for j in range(2):
+            l = i
+            r = i + j
+            while l >= 0 and r < len(s) and s[l] == s[r]:
+                res +=1
+                l -= 1
+                r += 1
+
+    return res
+
+    # dp
+    # time complexity O(n2)
+    n = len(s)
+    dp = [[False for i in range(n)] for _ in range(n)]
+    cnt = 0
+    # single letter is palindrome
+    for i in range(n):
+        dp[i][i] = True
+        cnt +=1
+
+    for i in range(n-1):
+        if s[i] == s[i+1]:
+            dp[i][i+1] = True
+            cnt+=1
+
+    for k in range(3,n+1):
+        search_till = n - k +1
+        for i in range(search_till):
+            left = i
+            right = i + k -1
+            if dp[left+1][right-1] and s[left] == s[right]:
+                dp[left][right] = True
+                cnt+=1
+
+    return cnt
+
+test = "abc"
+test1 = "aaa"
+test2 = 'abcaaeddde'
+test3 = "abcaa"
+
+print(countSubstrings(test))
+print(countSubstrings(test1))
+print(countSubstrings(test2))
+print(countSubstrings(test3))
+print()
+
+# 18. 4Sum
+def fourSum(nums,target):
+
+    # optimal solution
+    """
+    algorithm
+    1, get every two subset,
+    2, if length of subset is 2, we can just do 2 sum
+    3,
+    """
+    # time complexity O(n3)
+
+    def getFourSum(nums,t,n,sub,res):
+
+        if n == 2:
+            # get 2 sum that equal to cur_total
+            l, r = 0, len(nums) - 1
+            while l < r:
+                cur_total = nums[l] + nums[r]
+                if cur_total == t:
+                    res.append(sub+[nums[l],nums[r]])
+                    # when there is a match, move left pointer
+                    l += 1
+                    while l < r and nums[l-1] == nums[l]:
+                        l +=1
+
+                elif cur_total < t:
+                    l += 1
+
+                else:
+                    r -= 1
+
+        else:
+            for i in range(len(nums)):
+                if i == 0 or (i > 0 and nums[i] != nums[i-1]):
+                    getFourSum(nums[i + 1:], t-nums[i], n - 1, sub + [nums[i]], res)
+
+        return
+
+    res = []
+    sub = []
+    nums.sort()
+    getFourSum(nums,target,4,sub,res)
+    return res
+
+    # brute force
+    # res = []
+    # nums.sort()
+    # for i in range(len(nums)):
+    #     for j in range(i+1,len(nums)):
+    #         for k in range(j + 1, len(nums)):
+    #             for o in range(k + 1, len(nums)):
+    #                 if nums[i] + nums[j] + nums[k] + nums[o] == target:
+    #                     res.append([nums[i],nums[j],nums[k],nums[o]])
+    #
+    # final_res = []
+    # for li in res:
+    #     if li not in final_res:
+    #         final_res.append(li)
+    #
+    # return final_res
+
+# print(fourSum([-3,-2,-1,0,0,1,2,3],0)) # [[-3,-2,2,3],[-3,-1,1,3],[-3,0,0,3],[-3,0,1,2],[-2,-1,0,3],[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+print(fourSum([1,0,-1,0,-2,2],0)) # [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+print(fourSum([-1,0,-5,-2,-2,-4,0,1,-2],-9)) # [[-5,-4,-1,1],[-5,-4,0,0],[-5,-2,-2,0],[-4,-2,-2,-1]]
+print()
 
 # 11/14/2019
+# 15. 3Sum
 def threeSum(nums):
 
     # optimal solution
