@@ -1,6 +1,90 @@
 # Leetcode
 # Backtracking
 
+# 11/17/2019
+# 64. Minimum Path Sum
+def minPathSum(grid):
+
+    # dp
+    # time complexity: O(mn)
+    # space complexity: O(1)
+    for i in range(len(grid)):
+        grid[i][0] = grid[i-1][0] + grid[i][0] if i > 0 else grid[i][0]
+        for j in range(1,len(grid)):
+            # if i is less than 0, take care of first row
+            grid[i][j] = min(grid[i-1][j],grid[i][j-1]) + grid[i][j] if i > 0 else grid[i][j-1] + grid[i][j]
+
+    return grid[-1][-1]
+
+
+    # dp
+    """
+    algorithm
+    1, get first row and colum
+    2, and dp from 1,1.
+    3, 1,0 and 0,1 are already computed so just get minimum of those
+    """
+    # time complexity: O(mn)
+    # space complexity: O(mn)
+    dp = [[0 for _ in range(len(grid))] for _ in range(len(grid[0]))]
+    dp[0][0] = grid[0][0]
+    # get first row
+    for i in range(1,len(grid)):
+        dp[0][i] = dp[0][i-1] + grid[0][i]
+
+    for j in range(1,len(grid[0])):
+        dp[j][0] = dp[j-1][0] + grid[j][0]
+
+    for x in range(1,len(grid)):
+        for y in range(1,len(grid[0])):
+            dp[x][y] = min(dp[x-1][y],dp[x][y-1]) + grid[x][y]
+
+    return dp[-1][-1]
+
+    """
+    algorithm
+    1, traverse backwards
+    2, get minimum path for each cell.
+    # path is from right bottom to current cell
+    """
+    # time complexity: O(mn)
+    # space complexity: O(mn)
+    def dfs(gird,r,c):
+        if (r,c) in memo:
+            return memo[(r,c)]
+
+        # since we are going backwards, no need to check top and right boundary
+        if r < 0 or c < 0:
+            # return max so current cell gets minimum path
+            return float("inf")
+
+        result = min(dfs(gird,r-1,c),dfs(gird,r,c-1))
+        memo[(r,c)] = result
+        return result
+
+    # get destination's value
+    memo = {(0,0):grid[r][c]}
+    return dfs(grid,len(grid)-1,len(grid[0])-1)
+
+    # time complexity O(n^2 m+n)
+    # brute force
+    # def dfs(grid,r,c,cur_max):
+    #
+    #     if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]): return
+    #     if (r,c) == (len(grid)-1,len(grid[0])-1):
+    #         cur_max+=grid[r][c]
+    #         res.append(cur_max)
+    #         return
+    #     return dfs(grid,r+1,c,cur_max+grid[r][c]) or dfs(grid,r,c+1,cur_max+grid[r][c])
+    # res = []
+    # dfs(grid,0,0,0)
+    # return min(res)
+
+test = [[1,3,1],
+        [1,5,1],
+        [4,2,1]]
+print(minPathSum(test))
+
 # still not completely understand recursion so more practice!!
 
 # new problem will be on top

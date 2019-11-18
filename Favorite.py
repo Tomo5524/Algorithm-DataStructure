@@ -928,9 +928,9 @@ def assignBikes(workers, bikes):
 
 workers = [[0,0],[2,1]]
 bikes = [[1,2],[3,3]]
+print(assignBikes(workers,bikes))
 workers1 = [[0,0],[1,1],[2,0]]
 bikes1 = [[1,0],[2,2],[2,1]]
-print(assignBikes(workers,bikes))
 print(assignBikes(workers1,bikes1))
 
 # 10/28/2019

@@ -1,4 +1,54 @@
 
+# 11/17/2019
+# 394. Decode String
+def decodeString(s):
+
+    """
+    algorithm
+    1, use stack, and take care of inner most bracket first
+    2, and expand to outer bracket
+    3,
+    """
+    # time complexity O(n)
+    stack = []
+    for ch in s:
+        if ch == "]":
+            # get character in innermost bracket
+            cur = ''
+            while stack:
+                val = stack.pop()
+                # keep popping until we see open bracket
+                if val == "[":
+                    break
+                # new val should come in the front
+                cur = val + cur
+
+            # get number that belongs to the bracket we are on now
+            num = ''
+            # we don't want to pop top value in stack yet,
+            # as we can only pop it when we know last value in stack is digit
+            while stack and stack[-1].isdigit():
+                # popped value should come first for edge case '123[ab]]
+                num = stack.pop() + num
+
+            stack.append(int(num)*cur)
+
+        else:
+            stack.append(ch)
+
+    return ''.join(stack)
+
+
+test = "3[a]2[bc]" # return "aaabcbc".
+test1 = "3[a2[c]]" # return "accaccacc".
+test2 = "2[abc]3[cd]ef" # return "abcabccdcdcdef".
+test3 = '12[leetcode]'
+print(decodeString(test))
+print(decodeString(test1))
+print(decodeString(test2))
+print(decodeString(test3))
+print()
+
 # 11/16/2019
 # 238. Product of Array Except Self
 def product(arr):
