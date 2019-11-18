@@ -66,6 +66,7 @@ print()
 # 10/27/2019
 
 # 239. Sliding Window Maximum
+# # return each max element from each subarray with length of k
 from collections import deque
 def maxSlidingWindow(nums,k):
 
@@ -109,11 +110,11 @@ def maxSlidingWindow(nums,k):
     return res
 
 
-meow = [1,3,1,2,0,5]
+meow = [1,3,1,2,0,5] # [3, 3, 2, 5]
 k = 3
-meow1 = [1,3,-1,-3,5,3,6,7]
+meow1 = [1,3,-1,-3,5,3,6,7] # [3, 3, 5, 5, 6, 7]
 k1 = 3
-meow2 = [4,3,11]
+meow2 = [4,3,11] # [11]
 k2 = 3
 meow3 = []
 k3 = 0
@@ -582,10 +583,10 @@ def maxKsubarray(arr,k):
     res.append(arr[q[0]])
     return res
 
-meow = [10,5,2,7,8,7]
-meow1 = [5,10,2,7,8,7]
-meow2 = [1,2,3,4,5,6]
-meow3 = [6,5,4,3,2,1]
+meow = [10,5,2,7,8,7] # [10, 7, 8, 8]
+meow1 = [5,10,2,7,8,7] # [10, 10, 8, 8]
+meow2 = [1,2,3,4,5,6] # [3, 4, 5, 6]
+meow3 = [6,5,4,3,2,1] # [6, 5, 4, 3]
 print(maxKsubarray(meow,3))
 print(maxKsubarray(meow1,3))
 print(maxKsubarray(meow2,3))
