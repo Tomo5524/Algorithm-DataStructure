@@ -6,6 +6,31 @@
 # 518. Coin Change 2
 def change(amount,coins):
 
+    """
+    key is to divide whole problem into sub problems
+    and think about base case of brute force
+    algorithm
+    1, find number of combinations that make up current amount with current coin
+    2, create dp and find out how many combinations required to make up current amount
+        # to make up 0, there is only one combination which is 0
+    3,
+    """
+
+    # dp
+    # Time complexity: O(N×amount), where N is a length of coins array.
+
+    # create dp
+    dp = [1] + [0]*amount
+
+    for coin in coins:
+        # now we try to find out number of combinations that make up current amount with current coin
+        for i in range(coin,amount+1):
+            # dp[i-coin] represents how many coins do we need to make up current amount
+            dp[i] = dp[i] + dp[i - coin]
+
+    return dp[-1]
+
+    # brute force
     def get_subset(coins,sub,res):
         if sum(sub) == amount:
             res.append(sub)
@@ -22,13 +47,13 @@ def change(amount,coins):
 
 amount = 5
 coins = [1, 2, 5]
-print(change(amount,coins))
+print(change(amount,coins)) # 4
 amount1 = 3
 coins1 = [2]
-print(change(amount1,coins1))
+print(change(amount1,coins1)) # 0
 amount2 = 10
 coins2 = [10]
-print(change(amount2,coins2))
+print(change(amount2,coins2)) # 1
 print()
 
 
