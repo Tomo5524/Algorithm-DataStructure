@@ -1,6 +1,20 @@
 # Leetcode
 from collections import Counter
 import heapq
+
+# 621. Task Scheduler
+
+
+["A","A","A","B","B","B"] n = 2
+["A","B","C","A","B","C","D","E","F","G"] n  = 2
+["A","A","A"] n = 2
+["A","A","A","B"] n = 2
+["A","A","A","B","B","C","C"] n = 2
+["A","B","C","A","B","C"] n  =2 # no idle time
+
+
+
+
 # 703. Kth Largest Element in a Stream
 
 class KthLargest:

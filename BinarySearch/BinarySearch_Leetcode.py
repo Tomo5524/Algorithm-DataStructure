@@ -2,6 +2,68 @@
 
 # key is to find out the first left and right bound. how to find them
 
+# 410. Split Array Largest Sum
+
+
+# 11/18/2019
+# 1231. Divide Chocolate
+def maximizeSweetness(sweetness,k):
+
+    """
+    key is to Find the maximum among the minimum subarray sums
+    algorithm
+    1,  the desired total sweetness must fall in the range from the minimum
+        sweetness to the average sweetness of the (K + 1) pieces
+        meaning we know l and r now
+    2, if current chocolate bars with current target is less than k+1 (number of people including myself),
+        some of us cannot have chocolate so we need to increase number of bars by increasing left bound getting mid
+        otherwise, keep local solution, and to get more optimal solution, decrease right bound
+
+    3, even current sweetness will be greater than target
+        e,g, [1,2,3,4,5,6,7,8,9], I thought it will get 7 bars with target 6 but
+        sweetness of each bar can be greater than target, so it will end up 5
+        [1,2,3,4][5,6][7][8][9]
+    """
+
+
+    l,r = min(sweetness),sum(sweetness)//(k+1)
+    while l < r:
+        cur_bars = 0
+        # without +1, in test case 1, it will get stuck when target is 6
+        target = (l+r+1) // 2
+        cur_sweetness = 0
+        for val in sweetness:
+            cur_sweetness += val
+            # if the current piece has a total greater than or equal to the
+            # given target, make a cut
+            if cur_sweetness >= target:
+                # reset cur_sweetness
+                cur_sweetness = 0
+                # take apart a piece of chocolate
+                cur_bars +=1
+
+        # we cannot give every one a piece of bar so decrease target by decreasing right bound
+        if cur_bars < k+1:
+            r = target - 1
+
+        # otherwise, we try to increase target to get optimal solution (sneakily) as much as we can
+        else:
+            l = target
+
+    return l
+
+sweetness = [1,2,3,4,5,6,7,8,9]
+K = 5
+sweetness1 = [5,6,7,8,9,1,2,3,4]
+K1 = 8
+sweetness2 = [1,2,2,1,2,2,1,2,2]
+K2 = 2
+print(maximizeSweetness(sweetness,K))
+print(maximizeSweetness(sweetness1,K1))
+print(maximizeSweetness(sweetness2,K2))
+print()
+
+
 # 1011. Capacity To Ship Packages Within D Days
 
 # return the least weight capacity of the ship that will result in all packages

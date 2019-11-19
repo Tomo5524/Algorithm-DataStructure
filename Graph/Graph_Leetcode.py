@@ -742,51 +742,51 @@ def eventualSafeNodes(graph):
 
     return res
 
-    # """
-    # algorithm, be familiar with how to detect graph in directed cycle
-    # 1, create directed graph, the may of making graph is different than usual
-    # 2, visit all the edges of current vertex with dfs
-    # 2, if vertex has no outgoing directed edges, return that vertex
-    # 3, if there is no cycle from current vertex, return that vertex
-    # """
-    #
-    # g = defaultdict(list)
-    # for vertex in range(len(graph)):
-    #     for edge in graph[vertex]:
-    #         g[vertex].append(edge)
-    #
-    # def dfs(v):
-    #     # visiting currnet vertex at this very moment
-    #     visited.add(v)
-    #     each_v[v] = True
-    #     for edge in g[v]:
-    #         # 0:[1,2], doesnt get to 2 cuz 1 will return true as 1 is alerady visited
-    #         if edge not in visited:
-    #             dfs(edge)
-    #
-    #         # detect cycle
-    #         # in first test case, 0:[1,2] 2 wont be visited cuz 1 will return true
-    #         if each_v[edge]:
-    #             return True
-    #
-    #     # when current vertex has no edges, reset
-    #     # e,g, index 5 has no edge, yes is visited from index 2
-    #     # so need to reset
-    #     # vertex that has no outgoing edges will stay false
-    #     # if it does, it will stay true as loop is detected
-    #     each_v[v] = False
-    #     return False
-    #
-    # visited = set()
-    # each_v = [False for i in range(len(graph))]
-    # res = []
-    # for v in range(len(graph)):
-    #     # if loop found, dont wannt add it to result
-    #     # as the goal is to return non cycle vertex
-    #     if not dfs(v):
-    #         res.append(v)
-    #
-    # return res
+    """
+    algorithm, be familiar with how to detect graph in directed cycle
+    1, create directed graph, the may of making graph is different than usual
+    2, visit all the edges of current vertex with dfs
+    2, if vertex has no outgoing directed edges, return that vertex
+    3, if there is no cycle from current vertex, return that vertex
+    """
+
+    g = defaultdict(list)
+    for vertex in range(len(graph)):
+        for edge in graph[vertex]:
+            g[vertex].append(edge)
+
+    def dfs(v):
+        # visiting currnet vertex at this very moment
+        visited.add(v)
+        each_walk.add(v)
+        for edge in g[v]:
+            # 0:[1,2], doesnt get to 2 cuz 1 will return true as 1 is alerady visited
+            if edge not in visited:
+                dfs(edge)
+
+            # detect cycle
+            # in first test case, 0:[1,2] 2 wont be visited cuz 1 will return true
+            if edge in each_walk :
+                return True
+
+        # when current vertex has no edges, reset
+        # e,g, index 5 has no edge, yes is visited from index 2
+        # so need to reset
+        # vertex that has no outgoing edges will stay false
+        # if it does, it will stay true as loop is detected
+        each_walk.discard(v)
+        return False
+
+    visited = set()
+    each_walk = set()
+    res = []
+    for v in range(len(graph)):
+        # if loop found, dont wannt add it to result
+        # as the goal is to return non cycle vertex
+        if not dfs(v):
+            res.append(v)
+
+    return res
 
 meow = [[1,2],[2,3],[5],[0],[5],[],[]] # [2,4,5,6]
 meow1 = [[],[0,2,3,4],[3],[4],[]] # [0,1,2,3,4]

@@ -1,4 +1,37 @@
 
+# 11/18/2019
+# 1165. Single-Row Keyboard
+def calculateTime(keyboard,word):
+    """
+    algorithm
+    1, create hash map for keyboard
+    2, get distance from cur_word to previous word using absolute
+        e,g, 'cba', c moves from 0 to 2, so curmax = 2,
+                    b moves from 2 to 1 so cur_max = 3
+                    a moves from 1 to 0 so cur_max = 4
+    """
+
+    dic = {}
+    for i in range(len(keyboard)):
+        dic[keyboard[i]] = i
+
+    res = 0
+    pre = 0
+    for j in range(len(word)):
+        cur = pre - dic[word[j]]
+        res += abs(cur)
+        pre = dic[word[j]]
+
+    return res
+
+keyboard = "abcdefghijklmnopqrstuvwxyz"
+word = "cba"
+print(calculateTime(keyboard,word))
+keyboard1 = "pqrstuvwxyzabcdefghijklmno"
+word1 = "leetcode"
+print(calculateTime(keyboard1,word1))
+print()
+
 # collection of questions
 from collections import defaultdict
 import heapq
@@ -59,8 +92,11 @@ pipes2 = [[2,1,45475],[3,2,41579],[4,1,79418],[5,2,17589],[7,5,4371],[8,5,82103]
 # print(minCostToSupplyWater(n2, wells2, pipes2)) # 362782
 n3 = 3
 wells3 = [1, 2, 2]
-pipes3 = [[1, 2, 1000], [2, 3, 2221]]
-print(minCostToSupplyWater(n3, wells3, pipes3)) # 5
+pipes3 = [[1, 2, 1000], [2, 3, 2221]] # 5
+print(minCostToSupplyWater(n, wells, pipes))
+print(minCostToSupplyWater(n1, wells1, pipes1))
+print(minCostToSupplyWater(n2, wells2, pipes2))
+print(minCostToSupplyWater(n3, wells3, pipes3))
 print()
 
 # 11/10/2019

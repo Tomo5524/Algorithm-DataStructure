@@ -2,6 +2,68 @@
 
 # Leetcode
 
+# 11/18/2019
+# 518. Coin Change 2
+def change(amount,coins):
+
+    def get_subset(coins,sub,res):
+        if sum(sub) == amount:
+            res.append(sub)
+
+        if sum(sub) > amount:
+            return
+
+        for i in range(len(coins)):
+            get_subset(coins[i:],sub+[coins[i]],res)
+
+    res = []
+    get_subset(coins,[],res)
+    return len(res)
+
+amount = 5
+coins = [1, 2, 5]
+print(change(amount,coins))
+amount1 = 3
+coins1 = [2]
+print(change(amount1,coins1))
+amount2 = 10
+coins2 = [10]
+print(change(amount2,coins2))
+print()
+
+
+# 11/17/2019
+# 64. Minimum Path Sum
+def minPathSum(grid):
+    # dp
+    """
+    algorithm
+    1, get first row and colum
+    2, and dp from 1,1.
+    3, 1,0 and 0,1 are already computed so just get minimum of those
+    """
+    # time complexity: O(mn)
+    # space complexity: O(mn)
+    dp = [[0 for _ in range(len(grid))] for _ in range(len(grid[0]))]
+    dp[0][0] = grid[0][0]
+    # get first row
+    for i in range(1,len(grid)):
+        dp[0][i] = dp[0][i-1] + grid[0][i]
+
+    for j in range(1,len(grid[0])):
+        dp[j][0] = dp[j-1][0] + grid[j][0]
+
+    for x in range(1,len(grid)):
+        for y in range(1,len(grid[0])):
+            dp[x][y] = min(dp[x-1][y],dp[x][y-1]) + grid[x][y]
+
+    return dp[-1][-1]
+
+test = [[1,3,1],
+        [1,5,1],
+        [4,2,1]] # 7
+print(minPathSum(test))
+
 # 11/4/2019
 def maximalSquare(matrix):
     """
