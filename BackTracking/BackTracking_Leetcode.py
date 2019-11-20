@@ -6,7 +6,7 @@
 def minPathSum(grid):
 
     # dp
-    # time complexity: O(mn)
+    # time complexity: O(m*n)
     # space complexity: O(1)
     for i in range(len(grid)):
         grid[i][0] = grid[i-1][0] + grid[i][0] if i > 0 else grid[i][0]
@@ -105,13 +105,13 @@ def exist(temp_board, word):
         put back all the values at current cell
     """
     # this is a little bit more efficient because it returns true as soon as all the letters are found
-    def dfs(board, r, c, ans, cnt):
+    def dfs(board, r, c, ans, idx):
 
         # constraint, base case
-        if r < 0 or r >= len(board) or c < 0 or c >= len(board[0]) or board[r][c] != word[cnt]:
+        if r < 0 or r >= len(board) or c < 0 or c >= len(board[0]) or board[r][c] != word[idx]:
             return False
 
-        ans += word[cnt]
+        ans += word[idx]
         # goal
         # as soon as all letters are found
         if ans == word:
@@ -122,12 +122,12 @@ def exist(temp_board, word):
         # w/o this, it will cause infinite loop
         board[r][c] = "*"
         # current letter is found so next letter
-        cnt+=1
+        idx+=1
 
-        if dfs(board, r + 1, c, ans,cnt) or \
-            dfs(board, r - 1, c,ans,cnt) or \
-            dfs(board, r, c + 1,ans,cnt) or \
-            dfs(board, r, c - 1,ans,cnt):
+        if dfs(board, r + 1, c, ans,idx) or \
+            dfs(board, r - 1, c,ans,idx) or \
+            dfs(board, r, c + 1,ans,idx) or \
+            dfs(board, r, c - 1,ans,idx):
             return True
 
         # place original string at the current cell
@@ -136,7 +136,7 @@ def exist(temp_board, word):
         board[r][c] = temp
         return False
 
-    board = temp_board[:]
+    #board = temp_board[:]
     for i in range(len(board)):
         for j in range(len(board[0])):
             # takes place only when current cell equals the first letter of target

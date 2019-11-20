@@ -1,8 +1,56 @@
 # LeetCode
 
 
-# 11/5/2019
+# 11/19/2019
 
+# one letter can only be converted once
+def canConvert(str1,str2):
+
+    """
+    key is to understand how conversion is performed
+    one letter can be converted only one oterwise it violates the rule
+    e,g, 'aabcc', 'ccdee' = a->c, b->d c->e
+    algorithm
+    1, we can only use one letter for one conversion
+        so create hash and if we see the letter that is already used, return False
+    3, If all 26 characters are represented, there are no characters available to use for temporary conversions
+        so transformation is impossible
+    4, The only exception to this is if str1 is equal to str2, so we handle this case at the start of the function.
+    """
+
+    if str1 == str2:
+        return True
+
+    g = {}
+    for i in range(len(str1)):
+        if str1[i] not in g:
+            g[str1[i]] = str2[i]
+
+        elif g[str1[i]] != str2[i]:
+            return False
+
+    return len(set(str2)) < 26
+
+str1 = "aabcc"
+str2 = "ccdee"
+s1 = "abcdefghijklmnopqrstuvwxyz"
+s2 = "bcdefghijklmnopqrstuvwxyza" # False
+# false as 'a' causes a cycle
+s3 = "ab"
+s4 = "ba"
+str3 = "leetcode"
+str4 = "codeleet"
+s5 = "abcdefghijklmnopqrstuvwxyz"
+s6 = "bcdefghijklmnopqrstuvwxyzq"# True
+s7 = "abcdefghijklmnopqrstuvwxyz"
+s8 = "abcdefghijklmnopqrstuvwxyz" # True
+print(canConvert(str1,str2)) # true
+print(canConvert(s1,s2))# false
+print(canConvert(s3,s4))# true
+print(canConvert(str3,str4))# false
+print(canConvert(s5,s6))# true
+print(canConvert(s7,s8))# true
+print()
 
 # 11/4/2019
 # 269. Alien Dictionary
@@ -86,26 +134,31 @@ def findOrder(numCourses,prerequisites):
     # BFS
     """
     algorihtm
-    1, create undirected graph,
+    1, create directed graph,
     2, and create array that keeps track of indegree.
     3, create queue and append vertices that have no incoming endges
     4, right after popping vertex from queue, append it to result array
     5, Decrease in-degree by 1 for all its neighboring nodes or current vertex (edges)
     6, If in-degree of a neighboring nodes is reduced to zero, then add it to the queue.
     """
+    # Time complexity: O(V + E)
     g = defaultdict(list)
+    #indegree = {}
     # directed graph
     for u, v in prerequisites:
         g[u].append(v)
 
+        #indegree[u] = indegree.get(u, 0) + 1
+
     # get number of incoming edges for each vertex
-    indegree = [0] * numCourses
+    indegree = [0]*numCourses
     for i in range(numCourses):
         for edge in g[i]:
             indegree[edge] += 1
 
     # Pick all the vertices that have 0 in-degree and add them into a queue
     q = deque([i for i in range(len(indegree)) if indegree[i] == 0])
+    #q = deque([i for i in range(numCourses) if i not in indegree])
     # for i in range(len(indegree)):
     #     if indegree[i] == 0:
     #         q.append(i)
@@ -126,6 +179,7 @@ def findOrder(numCourses,prerequisites):
     return res if len(res) == numCourses else []
 
     # recursive dfs
+    # Time complexity: O(V + E)
     g = defaultdict(list)
     # directed graph
     for u, v in prerequisites:
@@ -196,6 +250,7 @@ def findRedundantConnection(edges):  # detect loop and remove it
     :return:
     """
 
+    # time compexity O(n)
     def find_parent(x):
         # If x is the parent of itself
         # return x
@@ -236,8 +291,9 @@ def findRedundantConnection(edges):  # detect loop and remove it
 
 meow = [[1, 2], [1, 3], [2, 3]]
 meow1 = [[1, 2], [2, 3], [3, 4], [1, 4], [1, 5]]
-print(findRedundantConnection(meow))
+# print(findRedundantConnection(meow))
 print(findRedundantConnection(meow1))
+print()
 
 # 547. Friend Circles
 
@@ -283,15 +339,16 @@ def findCircleNum(M):
 
 meow = [[1,1,0],
         [1,1,0],
-        [0,0,1]]
+        [0,0,1]] # 2
 
 meow1 = [[1,1,0],
         [1,1,1],
-        [0,1,1]]
+        [0,1,1]] # 1
 
-print('meow')
+print('findCircleNum')
 print(findCircleNum(meow))
 print(findCircleNum(meow1))
+print()
 
 # 743. Network Delay Time
 # https://leetcode.com/problems/network-delay-time/discuss/187713/Python-concise-queue-and-heap-solutions
@@ -312,12 +369,15 @@ def networkDelayTime(times, N, K):
        2, crete dict that keeps track of each node path and holds smallest path (3:7 and 3:4) holds 3:4
        3, if length of dict equals N return max path
        """
+    # time complexity O(V+E)*O(LogE) = O(VlogE)
     g = defaultdict(dict)
     for u, v, w in times:
         g[u][v] = w
 
     heap = [(0, K)]
     dst = {}
+    max_cost = 0
+
     while heap:
         cost, s = heapq.heappop(heap)
         # this dic keeps track of path along with duplicates
@@ -325,33 +385,37 @@ def networkDelayTime(times, N, K):
         if s not in dst:
             # if current vertex not visited, visit all the neighbours and keep track of path
             dst[s] = cost
+            max_cost = max(max_cost,cost)
 
             for d in g[s]:
                 heapq.heappush(heap, (cost + g[s][d], d))
 
     # if lenght of dst equals N that means all nodes are visited
-    return max(dst.values()) if len(dst) == N else -1
+    return max_cost if len(dst) == N else -1
 
 
-meow  =[[2,1,1],[2,3,1],[3,4,1]]
+meow  =[[2,1,1],[2,3,1],[3,4,1]] # 2
 n = 4
 k = 2
-meow1 = [[1,2,1],[2,1,3]]
+meow1 = [[1,2,1],[2,1,3]] # 3
 n1 = 2
 k1 = 2
-meow2 = [[1,2,1],[2,3,7],[1,3,4],[2,1,2]]
+meow2 = [[1,2,1],[2,3,7],[1,3,4],[2,1,2]] # 4
 n2 = 3
 k2 = 1
-meow3 = [[1,2,1]]
+meow3 = [[1,2,1]] # -1
 n3 = 2
 k3 = 2
-meow4 = [[1,2,1],[2,3,2],[1,3,7],[2,1,2]]
+meow4 = [[1,2,1],[2,3,2],[1,3,7],[2,1,2]] # 3
 n4 = 3
 k4 = 1
+print("networkDelayTime")
 print(networkDelayTime(meow,n,k))
 print(networkDelayTime(meow1,n1,k1))
 print(networkDelayTime(meow2,n2,k2))
 print(networkDelayTime(meow3,n3,k3))
+print(networkDelayTime(meow4,n4,k4)) # 3
+print()
 
 # 787. Cheapest Flights Within K Stops
 
@@ -363,12 +427,13 @@ def findCheapestPrice(n,flights,src,dst,k):
     2, find the cheapest path from current city to destination
     3, key is k should start off 1 as the current city you are in should already be visited
     4, otherwise, when k is 0, you will not travel any city
+    5, when we reach destination, return cost
 
     """
     # create graph
-    g = defaultdict(dict)
+    g = defaultdict(list)
     for u,v,c  in flights:
-        g[u][v] = c
+        g[u].append((v,c))
 
     # heap = [cost,cur_vtx,stop]
     heap = [(0,src,k+1)] # K should be +1 as current city you are in should count
@@ -380,9 +445,9 @@ def findCheapestPrice(n,flights,src,dst,k):
         # as long as k is greater than 0, visit neighbor cities
         # if k is 0 just get neighbours of the beginning city
         if k > 0:
-            for nei in g[cur_city]:
+            for nei,c in g[cur_city]:
 
-                heapq.heappush(heap,(cost+g[cur_city][nei],nei,k-1)) # nei is key of dict
+                heapq.heappush(heap,(cost+c,nei,k-1)) # nei is key of dict
 
     return -1
 
@@ -391,41 +456,36 @@ meow = [[0,1,100],[1,2,100],[0,2,500]]
 src = 0
 dst = 2
 k = 0
-
+print(findCheapestPrice(n, meow,src, dst,k)) # 500
 n1 = 4
 meow1 = [[0,1,1],[0,2,5],[1,2,1],[2,3,1]]
 src1 = 0
 dst1 = 3
 k1 = 1
-
+print(findCheapestPrice(n1, meow1,src1, dst1,k1)) # 6
 n2 = 2
 meow2 =[[0,1,2]]
 src2 = 1
 dst2 = 0
 k2 = 0
-
+print(findCheapestPrice(n2, meow2,src2, dst2,k2)) # -1
 n3 = 3
 meow3 = [[0,1,100],[1,2,100],[0,2,500]]
 src3 = 0
 dst3 = 2
 k3 = 1
-
+print(findCheapestPrice(n3, meow3,src3, dst3,k3)) # 200
 # when you are already in destination
 n4 = 3
 meow4 = [[0,1,100],[1,2,100],[0,2,500]]
 src4 = 0
 dst4 = 0
 k4 = 1
+print(findCheapestPrice(n4, meow4,src4, dst4,k4)) # 0
 
-print(findCheapestPrice(n, meow,src, dst,k))
-print(findCheapestPrice(n1, meow1,src1, dst1,k1))
-print(findCheapestPrice(n2, meow2,src2, dst2,k2))
-print(findCheapestPrice(n3, meow3,src3, dst3,k3))
-print(findCheapestPrice(n4, meow4,src4, dst4,k4))
 
 from collections import defaultdict, deque
 import heapq
-
 
 def findMinHeightTrees(n, edges):
     # edge case
@@ -750,6 +810,7 @@ def eventualSafeNodes(graph):
     3, if there is no cycle from current vertex, return that vertex
     """
 
+    # Time complexity: O(V + E)
     g = defaultdict(list)
     for vertex in range(len(graph)):
         for edge in graph[vertex]:

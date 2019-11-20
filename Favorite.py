@@ -370,12 +370,13 @@ t4 = "aaaaaaaaaaaaa"
 s5 = "abcab"
 t5 = "aabbaac"
 
-# print(shortestWay(source,target))
-# print(shortestWay(source1,target1))
-# print(shortestWay(source2,target2))
-print(shortestWay(s3,t3))
-print(shortestWay(s4,t4))
-print(shortestWay(s5,t5))
+print('shortestWay')
+print(shortestWay(source,target)) # 2
+print(shortestWay(source1,target1)) # -1
+print(shortestWay(source2,target2)) # 3
+print(shortestWay(s3,t3)) # 13
+print(shortestWay(s4,t4)) # 3
+print(shortestWay(s5,t5)) # 3
 print()
 
 
