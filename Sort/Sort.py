@@ -16,6 +16,7 @@ def Selectionsort(A):
     #
     # return cnt
 
+# https://leetcode.com/discuss/interview-question/346621/Google-or-Phone-Screen-or-Min-swaps-to-sort-array
     # for duplicates
     heap = list(A)
     heapq.heapify(heap)
@@ -31,8 +32,10 @@ def Selectionsort(A):
         min_val = heapq.heappop(heap)
         if cur_val != min_val:
             min_idx = dic[min_val].pop()
-            dic[cur_val],dic[min_val] = min_idx,cur_idx
-            dic[cur_idx].append(min_idx)
+            dic[cur_val].append(min_idx)
+            dic[min_val].append(cur_idx)
+            # swap values in original arrays
+            A[cur_idx],A[min_idx] = min_val,cur_val
             cnt+=1
 
     return cnt

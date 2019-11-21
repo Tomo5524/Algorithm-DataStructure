@@ -282,6 +282,7 @@ print()
 # 1055. Shortest Way to Form String
 from collections import defaultdict
 import bisect
+#return the minimum number of subsequences of source such that their concatenation equals target. If the task is impossible, return -1.
 def shortestWay(source, target):
     """
     key is to use hashmap and how and what to store
@@ -295,7 +296,8 @@ def shortestWay(source, target):
     3, when source counter is greater than length of source or the last value in current letter's list
         get the smallest index of current letter
     """
-    # time complexity O(M + N*logM)
+    #time complexity O(M + N*logM)
+
     dic = defaultdict(list)
     for i,val in enumerate(source):
         dic[val].append(i)
@@ -315,10 +317,11 @@ def shortestWay(source, target):
         # get current letter's list (indices)
         positions = dic[letter]
         # if we cannot make subsequence from current position,
-        # start over and get the smallest index of current letter
+
         # with out second if statement, in test 5 when we reach c, it will go out of boundary
         # as s_pos is 4 which is out of range in c {c:[0]}
         if s_pos >= len(source) or s_pos > positions[-1]:
+            # start over and get the leftmost index of current letter
             s_pos = positions[0] + 1 # O(1)
             minimum +=1
 
@@ -326,7 +329,6 @@ def shortestWay(source, target):
             # get the closest letter from current index in source
             loc = bisect.bisect_left(positions,s_pos)
             s_pos = positions[loc] + 1
-
 
     return minimum
 
@@ -400,7 +402,6 @@ def numMatchingSubseq(S, words):
     """
 
     # time complexity: O(S+words)
-
     # create dictionary whose key is first word in each word
     dic = defaultdict(list)
     for word in words:
@@ -412,7 +413,7 @@ def numMatchingSubseq(S, words):
         waiting_words = dic[letter]
         # reset curent letter's list
         dic[letter] = []
-        for cur_word in waiting_words:
+        for w in waiting_words:
             if len(cur_word) == 1:
                 res+=1
 
@@ -423,9 +424,24 @@ def numMatchingSubseq(S, words):
 
     return res
 
+    # time complexity Time Complexity: O(words.length∗S.length+∑
+    # brute force
+    res = 0
+    for word in words:
+        word_idx = 0
+        for letter in S:
+            if word[word_idx] == letter:
+                word_idx += 1
+                if word_idx == len(word):
+                    res+=1
+                    break
+
+    return res
+
 
 S = "abcde"
 words = ["a", "bb", "acd", "ace"]
+print("numMatchingSubseq")
 print(numMatchingSubseq(S,words))
 print()
 
@@ -447,7 +463,7 @@ def expand(S):
     2, if current list's first element is not bracket, just append first element pass in list after the first element
     3, return result in lexicographical order.
     """
-
+    # time complexity O((v+e) nlogn)
     def dfs(S,ans):
 
         # base case
@@ -563,13 +579,13 @@ class SnapshotArray:
         #
         # return self.A[index][i][1]
 
-# obj = SnapshotArray(3)
-# obj.set(0,5)
+obj = SnapshotArray(3)
+obj.set(0,5)
+print(obj.snap())
+obj.set(0,6)
+print(obj.get(0,0))
 # print(obj.snap())
-# obj.set(0,6)
 # print(obj.get(0,0))
-## print(obj.snap())
-## print(obj.get(0,0))
 
 # obj = SnapshotArray(1)
 # obj.set(0,4)
@@ -589,6 +605,7 @@ print(obj.snap())
 obj.set(1,4)
 # ["SnapshotArray","snap","snap","get","set","snap","set"]
 # [[4],[],[],[3,1],[2,4],[],[1,4]]
+print(obj.snap())
 print()
 
 # ["SnapshotArray","set","set","set","snap","get","snap"]
@@ -622,16 +639,17 @@ class TimeMap:
         self.values = defaultdict(list)
 
     def set(self, key: str, value: str, timestamp: int) -> None:
-
+        # time complexity: O(1)
         self.times[key].append(timestamp)
         self.values[key].append(value)
 
 
     def get(self, key: str, timestamp: int) -> str:
+        # time complexity: O(logn)
         # # bisect will get the location of insert timestamp
         # so we want to return value that is located insert position -1
         loc = bisect.bisect_right(self.times[key],timestamp)
-        return self.values[key][loc-1] if loc else ""
+        return self.values[key][loc-1] if loc else None
         """
         key is to figure out low and high.
         and where exactly insert point ends up
@@ -650,7 +668,7 @@ class TimeMap:
             else:
                 r = mid - 1
 
-        return self.values[key][l-1] if l > 0 else ''
+        return self.values[key][l-1] if l > 0 else None
 
         # brute force
         # if self.times[key][0] > timestamp:
@@ -673,22 +691,22 @@ kv = TimeMap()
 # print(kv.get("foo", 4)) # ; // output "bar2"
 # print(kv.get("foo", 5)) # ; //output "bar2"
 
-# kv.set("love", "high", 10)
-# kv.set("love", "low", 20)
-# print(kv.get("love", 5))
-# print(kv.get("love", 10))
-# print(kv.get("love", 15))
-# print(kv.get("love", 20))
-# print(kv.get("love", 25))
+kv.set("love", "high", 10)
+kv.set("love", "low", 20)
+print(kv.get("love", 5))
+print(kv.get("love", 10))
+print(kv.get("love", 15))
+print(kv.get("love", 20))
+print(kv.get("love", 25))
 
 kv.set("ljfvbut","tatthnvvid",3)
-print(kv.get("ljfvbut",4))
-print(kv.get("ljfvbut",5))
-print(kv.get("ljfvbut",6))
-print(kv.get("ljfvbut",7))
+print(kv.get("ljfvbut",4)) # tatthnvvid
+print(kv.get("ljfvbut",5)) # tatthnvvid
+print(kv.get("ljfvbut",6))# tatthnvvid
+print(kv.get("ljfvbut",7)) # tatthnvvid
 kv.set("eimdon","pdjbnnvje",8)
-print(kv.get("eimdon",9))
-print(kv.get("eimdon",10))
+print(kv.get("eimdon",9)) # pdjbnnvje
+print(kv.get("eimdon",10)) # pdjbnnvje
 print()
 
 # 10/30/2019
@@ -729,7 +747,7 @@ def getMaximumGold(grid):
     3, get temporary value before mark current cell, and after getting max_path out of current cell
         place it back to original value
     """
-    # time complexity  O(m * n) where m = no_rows, n = no_cols
+    # time complexity O(mn + 4 ^ k), space: O(m * n), where k = number of gold cells, m = grid.length, n = grid[0].length.
     # space O(1)
     def dfs(grid, r, c, cur_max):
 
@@ -893,6 +911,7 @@ def assignBikes(workers, bikes):
     3, create heap which has only smallest distance for each worker
     4, pop heap and if bike is alredy taken, get next small for the current worker
     """
+    # time complexity  O(WB log(WB))
     distances = []
     for w,(w_row,w_col) in enumerate(workers):
         distance = []
@@ -989,7 +1008,7 @@ def minDominoRotations(A, B):
     3, pick the first number, and see if it can lead to the answer
     ## we don't actually rotate anything, just find out how many time it needs to virtually flip it to get same numbers in either row
     """
-
+    # time complexity O(N)
     def helper(A,B,t):
         # traverse list A
         rotation_a = 0
@@ -1040,11 +1059,13 @@ B3 = [2]
 
 A4 = [3,5,1,2,3]
 B4 = [3,6,3,3,4]
-print(minDominoRotations(A,B))
-print(minDominoRotations(A1,B1))
+print("minDominoRotations")
+print(minDominoRotations(A,B)) # 2
+print(minDominoRotations(A1,B1)) # 1
 print(minDominoRotations(A2,B2))
 print(minDominoRotations(A3,B3))
 print(minDominoRotations(A4,B4))
+print()
 
 # 1170. Compare Strings by Frequency of the Smallest Character
 
@@ -1057,7 +1078,7 @@ def numSmallerByFrequency(queries, words):
     1, count number of smallest letter for each word
     2, get answer by subtract each frequency in query with each frequency in word
     """
-
+    # time complexity is O(nlogn)
     def helper_cnt(s):
         # smallest letter is at front
         smallest = sorted(s)[0]
@@ -1103,9 +1124,6 @@ class Logger:
     def start(self,processId,startTime):
         if processId not in self.start_hash:
             self.start_hash[processId] = startTime
-
-        #else:
-
 
     # * When the same process ends, it calls 'end' with processId and endTime.
     def end(self,processId,endTime):
