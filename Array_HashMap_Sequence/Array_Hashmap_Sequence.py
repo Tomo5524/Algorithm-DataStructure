@@ -1,6 +1,51 @@
 
 # 11/30/2019
+# 1. Two Sum
 
+
+# 459. Repeated Substring Pattern
+def repeatedSubstringPattern(s):
+
+    # optimal solution
+    """
+    algorithm
+    1, it is basically to find repeated substring
+    2, impossible to have a substring >(len(s)/2), that can be repeated
+        so concatenate original input
+    3, and get rid of first and last character
+    So, when ss = s + s , we will have at least 4 parts of "repeated substring" in ss.
+        e,g, 'aba' -> ab,a,aba,ba,a
+     4, we are removing 1st char and last char => Out of 4 parts of repeated substring,
+        2 part will be gone (they will no longer have the same substring).
+        e,g,'aba' -> b,ba,ab,a
+    """
+
+    # aba will be true if I do not remove 1 and -1
+    ss = s+s[1:-1]
+    return s in ss
+
+    # brute force
+    # time complexity: O(n*m)
+    cur = ''
+    for ch in s:
+        cur += ch
+        temp = cur
+        while len(temp) <= len(s):
+            temp += cur
+            if temp == s:
+                return True
+
+    return False
+
+test = "abab"
+test1 = "aba"
+test2 = "abcabcabcabc"
+test3 = "helloworld"
+print(repeatedSubstringPattern(test))
+print(repeatedSubstringPattern(test1))
+print(repeatedSubstringPattern(test2))
+print(repeatedSubstringPattern(test3))
+print()
 
 # 11/17/2019
 # 394. Decode String
