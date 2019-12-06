@@ -1,9 +1,35 @@
 
 # 11/30/2019
 # 1. Two Sum
+def twoSum(nums, target):
+    """
+    algorithm
+    1, subtract each value with target
+    2, if current num is already in dictionary, we found two values whose sum equals target
+    3,
+    """
+
+    dic = {}
+    for i,num in enumerate(nums):
+        if num in dic:
+            return [dic[num],i]
+        else:
+            dic[target-num] = i
+
+    return None
 
 
 
+nums = [2, 7, 11, 15]
+target = 9
+n = [3,2,4]
+t = 6
+n1 = [1,6,-7,4,3]
+t1 = 10
+print(twoSum(nums,target))
+print(twoSum(n,t))
+print(twoSum(n1,t1))
+print()
 
 # 459. Repeated Substring Pattern
 def repeatedSubstringPattern(s):
@@ -308,7 +334,7 @@ def fourSum(nums,target):
     #     if li not in final_res:
     #         final_res.append(li)
     #
-    # return final_res
+    # return
 
 # print(fourSum([-3,-2,-1,0,0,1,2,3],0)) # [[-3,-2,2,3],[-3,-1,1,3],[-3,0,0,3],[-3,0,1,2],[-2,-1,0,3],[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
 print(fourSum([1,0,-1,0,-2,2],0)) # [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
@@ -334,6 +360,7 @@ def threeSum(nums):
         if nums[i] > 0: break
 
         # i > 0 for [0,0,0]
+        # w/o this, test3 will return the wrong answer
         if i > 0 and nums[i-1] == nums[i]:
             continue
 
@@ -382,19 +409,15 @@ def threeSum(nums):
     return res
 
 
-# print(threeSum([0,0,0,0]))
-# print(threeSum([0,0,0]))
-print(threeSum([-1, 0, 1, 2, -1, -4]))
-print(threeSum([-2,0,1,1,2]))
-print(threeSum([1,-1,-1,0]))
-print(threeSum([-2,0,0,2,2]))
+print(threeSum([0,0,0,0])) # [[0, 0, 0]]
+print(threeSum([0,0,0])) # [[0, 0, 0]]
+print(threeSum([-1, 0, 1, 2, -1, -4])) # [[-1, 0, 1], [-1, 2, -1]]
+print(threeSum([-2,0,1,1,2])) # [[-2, 0, 2], [-2, 1, 1]]
+print(threeSum([1,-1,-1,0])) # [[1, -1, 0]]
+print(threeSum([-2,0,0,2,2])) # [[-2, 0, 2]]
 print()
-[[0, 0, 0]]
-[[0, 0, 0]]
-[[-1, 0, 1], [-1, 2, -1]]
-[[-2, 0, 2], [-2, 1, 1]]
-[[1, -1, 0]]
-[[-2, 0, 2]]
+
+
 
 def generate(numRows):
     if numRows == 0:

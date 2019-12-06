@@ -1,6 +1,80 @@
 from Linkedlist_node_library import Node,convert_to_list,reverse
 from collections import deque
 
+# 160. Intersection of Two Linked Lists
+class LList:
+    def __init__(self):
+        self.head = None
+
+    def getIntersectionNode(self, headA):
+
+        """
+        algorithm
+        1, create 2 pointers, when shorter length reaches the end of it,
+            it will point to the head of the other llist
+            and longer one will do the same
+        2, and in second iteration, it is guaranteed that it reaches the intersection node at the same time
+        3, e,g,
+        """
+
+        # Time Complexity O(m+n) where m is headA and n is headB
+        # Space Complexity O(1)
+        p1 = self.head
+        p2 = headA.head
+        while p1 != p2:
+            p1 = headA.head if not p1 else p1.next
+
+            p2 = self.head if not p2 else p2.next
+
+        return p1.val
+
+        # Time Complexity O(m+n) where m is headA and n is headB
+        p1 = self.head
+        p2 = headA.head
+        seen = set()
+        while p1:
+            seen.add(p1)
+            p1 = p1.next
+
+        while p2:
+            if p2 in seen:
+                return p2.val
+
+            p2 = p2.next
+
+        return None
+
+        # brute force Time Complexity O(m*n)
+        # p1 = self.head
+        # p2 = headA.head
+        # while p1:
+        #     temp = p2
+        #     while temp:
+        #         if p1 == temp:
+        #             return p1.val
+        #         temp = temp.next
+        #
+        #     p1 = p1.next
+        #
+        # return None
+
+llist = LList()
+llist.head = Node(4)
+llist.head.next = Node(1)
+llist.head.next.next = Node(8)
+llist.head.next.next.next = Node(4)
+llist.head.next.next.next.next = Node(5)
+
+llist1 = LList()
+llist1.head = Node(5)
+llist1.head.next = Node(0)
+llist1.head.next.next = Node(1)
+llist1.head.next.next.next = llist.head.next.next
+llist1.head.next.next.next.next = llist.head.next.next.next
+llist1.head.next.next.next.next.next  =llist.head.next.next.next.next
+print(llist.getIntersectionNode(llist1))
+print()
+
 # 234. Palindrome Linked List
 class LinkedList:
     def __init__(self):
