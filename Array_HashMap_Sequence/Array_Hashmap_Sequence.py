@@ -130,9 +130,9 @@ print()
 def product(arr):
     """
     algorithm
-    Instead of dividing the product of all the numbers in the array by the number at a given index to get the corresponding product,
-    we can make use of the product of all the numbers to the left and all the numbers to the right of the index.
-    Multiplying these two individual products would give us the desired result as well.
+    1, Instead of dividing the product of all the numbers in the array by the number at a given index to get the corresponding product,
+        we can make use of the product of all the numbers to the left and all the numbers to the right of the index.
+    2, Multiplying these two individual products would give us the desired result as well.
     """
 
     res = []
@@ -150,9 +150,11 @@ def product(arr):
 
 arr = [1, 2, 3, 4]
 # [1,1,2,6]
+# [24,12,8,6]
 print(product(arr))
 print()
 
+# 341. Flatten Nested List Iterator
 from collections import deque
 class NestedIterator:
     def __init__(self, nestedList):
@@ -193,13 +195,13 @@ class NestedIterator:
 
 test = [[1,1],2,[1,1]]
 test1 = [1,[4,[6]]]
-i, v = NestedIterator(test), []
+i = NestedIterator(test)
 res_ = []
 res_1 = []
 while i.hasNext(): res_.append(i.next())
 print(res_)
 
-i, v = NestedIterator(test1), []
+i = NestedIterator(test1)
 while i.hasNext(): res_1.append(i.next())
 print(res_1)
 print()
@@ -268,10 +270,11 @@ test1 = "aaa"
 test2 = 'abcaaeddde'
 test3 = "abcaa"
 
-print(countSubstrings(test))
-print(countSubstrings(test1))
-print(countSubstrings(test2))
-print(countSubstrings(test3))
+print("countSubstrings")
+print(countSubstrings(test)) # 3
+print(countSubstrings(test1)) # 6
+print(countSubstrings(test2)) # 15
+print(countSubstrings(test3)) # 6
 print()
 
 # 18. 4Sum
@@ -418,7 +421,7 @@ print(threeSum([-2,0,0,2,2])) # [[-2, 0, 2]]
 print()
 
 
-
+# 118. Pascal's Triangle
 def generate(numRows):
     if numRows == 0:
         return None
@@ -477,7 +480,7 @@ def findUnsortedSubarray(nums):
 
     return (r - l) +1
 
-test = [1, 3, 7, 2, 5, 4, 6, 10]
+test = [1, 3, 7, 2, 5, 4, 6, 10] # 6
 test1 = [1,2,3,4] # 0
 test2 = [2,1] # 2
 test3 = [2,6,4,8,10,15] # 2
@@ -498,6 +501,7 @@ print()
 
 # 11/11/2019
 
+# 453. Minimum Moves to Equal Array Elements
 def minMoves(nums):
 
     # optimal solution
@@ -554,6 +558,7 @@ print(minMoves(test))
 print(minMoves(test1))
 print()
 
+# 560. Subarray Sum Equals K
 from collections import defaultdict
 def subarraySum(nums,k):
 
@@ -577,8 +582,8 @@ def subarraySum(nums,k):
 
         Sum += num
 
-        # increment count only if there is valid key in hmap
-        # valueAtK = Sum-k ; only if valueAtK exists as key in hmap
+        # increment count only if there is valid key in hashmap
+        # valueAtK = Sum-k ; only if valueAtK exists as key in hashmap
         if Sum - k in dic:
             res += dic[Sum-k]
             #dic[Sum-k] +=1
@@ -613,14 +618,14 @@ num4 = [0,0,0,0,0,0,0,0,0,0] # 55
 k4 = 0
 num5 = [3,4,7,2,-3,1,4,2] # 4
 k5 = 7
-print(subarraySum(nums,k))
-print(subarraySum(num1,k1))
-print(subarraySum(num2,k2))
-print(subarraySum(num3,k3))
-print(subarraySum(num4,k4))
+# print(subarraySum(nums,k))
+# print(subarraySum(num1,k1))
+# print(subarraySum(num2,k2))
+# print(subarraySum(num3,k3))
+# print(subarraySum(num4,k4))
 print(subarraySum(num5,k5))
 
-
+# 268. Missing Number
 def missingNumber(nums):
     # nums.sort()
     # nums_set = set(nums)
@@ -630,7 +635,7 @@ def missingNumber(nums):
     n = len(nums)
 
     # get the sum which is suppoused to be the sum
-    expected_sum = n * (n + 1) // 2
+    expected_sum = n * (n + 1) // 2 # this is how you are supposed to get expected sum, factrial of array
     # given sum
     actual_sum = sum(nums)
     return expected_sum - actual_sum
@@ -639,6 +644,34 @@ def missingNumber(nums):
 # 448. Find All Numbers Disappeared in an Array
 def findDisappearedNumbers(nums):
 
+    """
+    algorithm
+    1, since it states "All the elements are in the range [1, N]",
+        we can keep track of visited values
+    2, when iterating through each value, make current value's index negative,
+        so we can keep track of visited values
+    3,
+    """
+    # time complexity O(n)
+    # space complexity O(1)
+
+    for i in range(len(nums)):
+
+        # in testcase 1 when we are at val 7, we have to make it positive.
+        idx = abs(nums[i])
+        # skip duplicates
+        if nums[idx-1] > 0:
+            nums[idx-1] = nums[idx-1] * -1
+
+    res = []
+    for i in range(1,len(nums)+1):
+        if nums[i-1] > 0:
+            res.append(i)
+
+    return res
+
+    # time complexity O(n)
+    # space complexity O(n)
     seen = set()
     res = []
     for num in nums:
@@ -651,5 +684,8 @@ def findDisappearedNumbers(nums):
 
     return res
 
-[4,3,2,7,8,2,3,1]
-[1,1]
+test = [4,3,2,7,8,2,3,1]
+test1 = [1,1]
+print("findDisappearedNumbers")
+print(findDisappearedNumbers(test))
+print(findDisappearedNumbers(test1))

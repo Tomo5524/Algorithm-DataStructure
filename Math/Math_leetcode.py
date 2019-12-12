@@ -1,4 +1,41 @@
+def main(s, n):
+    if 0 < n <= 4:
+        return helper_(s, n)
 
+    elif 4 < n <= 7:
+        return helper(s,n)
+
+    #elif 7 < n <= 11
+
+def helper_(s, n):
+
+    ans = ""
+    for i in range(n):
+        ans += s[i]
+    return ans
+
+def helper(s,n):
+    cnt = 0
+    ans = ""
+    for i in range(1,len(s)):
+        ans += s[i]
+        cnt +=1
+
+    j = 0
+    while n > cnt:
+        ans += s[0] + s[j]
+        j += 1
+        cnt +=1
+
+    return ans
+
+
+test = 'ABCD'
+n = 3
+test1 = 'ABCD'
+n1 = 6
+print(main(test,n))
+print(main(test1,n1))
 
 # 11/14/2019
 def titleToNumber(s):
