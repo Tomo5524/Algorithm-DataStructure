@@ -44,6 +44,7 @@ def Selectionsort(A):
 test = [5,2,4,6,1,3]
 print(Selectionsort(test))
 
+
 def merge_sort(arr):
     # time complexity O(nlogn)
     if len(arr) > 1:  # there is just one element, recursion stops
