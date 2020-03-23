@@ -58,11 +58,11 @@ def canAttendMeetings(intervals):
 
     return True
 
-meow = [[0,30],[5,10],[15,20]] # false
-meow1 = [[7,10],[2,4]] # true
+test = [[0,30],[5,10],[15,20]] # false
+test1 = [[7,10],[2,4]] # true
 
-print(canAttendMeetings(meow))
-print(canAttendMeetings(meow1))
+print(canAttendMeetings(test))
+print(canAttendMeetings(test1))
 
 # 253. Meeting Rooms II
 
@@ -115,16 +115,16 @@ def meetingRooms(intervals):
     return rooms
 
 print()
-meow = [[0, 30],[5, 10],[15, 20]] # 2
-meow1 = [[7,10],[2,4]] # 1
-meow2 = [[1,5],[8,9],[8,9]] # 2
-meow3 = [[13,15],[1,13]]# 1
-meow4  =[[9,10],[4,9],[4,17]] # 2
-print(meetingRooms(meow))
-print(meetingRooms(meow1))
-print(meetingRooms(meow2))
-print(meetingRooms(meow3))
-print(meetingRooms(meow4))
+test = [[0, 30],[5, 10],[15, 20]] # 2
+test1 = [[7,10],[2,4]] # 1
+test2 = [[1,5],[8,9],[8,9]] # 2
+test3 = [[13,15],[1,13]]# 1
+test4  =[[9,10],[4,9],[4,17]] # 2
+print(meetingRooms(test))
+print(meetingRooms(test1))
+print(meetingRooms(test2))
+print(meetingRooms(test3))
+print(meetingRooms(test4))
 
 # 435. Non-overlapping Intervals
 
@@ -159,15 +159,15 @@ def eraseOverlapIntervals(intervals):
             # so we can accurately find out all overlapping
 
     return cnt
-meow = [[1,100],[11,22],[1,11],[2,12]] # 2
-meow1 = [[1,2],[2,3]] # 0
-meow2 = [[1,2],[2,3],[3,4],[1,3]] # 1
-meow3 =  [[1,2],[1,2],[1,2]] # 2
+test = [[1,100],[11,22],[1,11],[2,12]] # 2
+test1 = [[1,2],[2,3]] # 0
+test2 = [[1,2],[2,3],[3,4],[1,3]] # 1
+test3 =  [[1,2],[1,2],[1,2]] # 2
 print()
-print(eraseOverlapIntervals(meow))
-print(eraseOverlapIntervals(meow1))
-print(eraseOverlapIntervals(meow2))
-print(eraseOverlapIntervals(meow3))
+print(eraseOverlapIntervals(test))
+print(eraseOverlapIntervals(test1))
+print(eraseOverlapIntervals(test2))
+print(eraseOverlapIntervals(test3))
 
 # 56. Merge Intervals
 
@@ -207,22 +207,22 @@ def MergeIntervals(intervals):
 
     return res
 
-meow = [[1,4],[0,4]] # not sorted
-meow1 = [[1,4],[5,6]] # loop started from 1
-meow2 = [[1,3]]
-meow3 = [[1,4],[4,5]] # duplicats considered as over lapping, also started from 1
-meow4 = [[1,4],[2,3]] # keep greater end val
-meow5 = [[1,3],[2,6],[8,10],[15,18]]
+test = [[1,4],[0,4]] # not sorted
+test1 = [[1,4],[5,6]] # loop started from 1
+test2 = [[1,3]]
+test3 = [[1,4],[4,5]] # duplicats considered as over lapping, also started from 1
+test4 = [[1,4],[2,3]] # keep greater end val
+test5 = [[1,3],[2,6],[8,10],[15,18]]
 print()
-print(MergeIntervals(meow))
-print(MergeIntervals(meow1))
-print(MergeIntervals(meow2))
-print(MergeIntervals(meow3))
-print(MergeIntervals(meow4))
-print(MergeIntervals(meow5))
+print(MergeIntervals(test))
+print(MergeIntervals(test1))
+print(MergeIntervals(test2))
+print(MergeIntervals(test3))
+print(MergeIntervals(test4))
+print(MergeIntervals(test5))
 
-meow6 = [[2,3],[4,5],[6,7],[8,9],[1,10]]
-print(MergeIntervals(meow6))
+test6 = [[2,3],[4,5],[6,7],[8,9],[1,10]]
+print(MergeIntervals(test6))
 
 
 # 57. Insert Interval
@@ -246,13 +246,13 @@ def InsertInterval(intervals,newInterval):
     # add newInterval as new_start is somewhere between
     # if there is no overlap, just add the interval
     # what if not output or output[-1][1] < new_start:
-    # edge case, meow2 = [[1,5],[6,8]], newInterval2 = [0,9]
+    # edge case, test2 = [[1,5],[6,8]], newInterval2 = [0,9]
     # edge [[1,5]], t = [6,8], just "if not res", will just return 1,8
     # new_start 6 is greater than cur_end 5, it is overlapping thus append it
     # if not res or ns > intervals[idx][0], in [[1,5]] , t = [2,3] case,  it will be out ouf range
     # cuz idx is 1 and length is just 0
     ### if newstart is greater than cur end in list, it is not overlapping
-    if not res or new_start > res[-1][-1]:  # #meow1 = [[1,2],[5,6],[6,7],[8,10],[12,16]], t= 4,8
+    if not res or new_start > res[-1][-1]:  # #test1 = [[1,2],[5,6],[6,7],[8,10],[12,16]], t= 4,8
         # # 4(ns) will be greater than 2 so it will get 4 in above case
         res.append(newInterval)  # we found a new merging point in the case above, will get 4,8 instead of 5,6
     # if there is an overlap, merge with the last interval
@@ -278,41 +278,41 @@ def InsertInterval(intervals,newInterval):
 
     return res
 
-meow = [[1,3],[6,9]]
+test = [[1,3],[6,9]]
 newInterval = [2,5]
 
-meow1 = [[1,2],[3,5],[6,7],[8,10],[12,16]]
+test1 = [[1,2],[3,5],[6,7],[8,10],[12,16]]
 newInterval1 = [4,8]
 
-meow2 = [[1,5],[6,8]] # edge case, new_start is less
+test2 = [[1,5],[6,8]] # edge case, new_start is less
 newInterval2 = [0,9]
 
-meow3 = [[1,5]]
+test3 = [[1,5]]
 newInterval3 = [1,7]
 
-meow46 = []
+test46 = []
 newInterval4 = [5,7]
 
-meow5 = [[1,5]]
+test5 = [[1,5]]
 newInterval5 = [2,3]
 
-meow6 = [[1,2],[3,5],[4,17],[6,7],[8,10],[12,16]]
+test6 = [[1,2],[3,5],[4,17],[6,7],[8,10],[12,16]]
 newInterval6 = [4,8]
 
-meow7 = [[1,2],[5,6],[6,7],[8,10],[12,16]]
+test7 = [[1,2],[5,6],[6,7],[8,10],[12,16]]
 newInterval7 = [4,8]
 
-meow8 = [[1,5]]
+test8 = [[1,5]]
 newInterval8 = [6,8]
 
 print()
-print(InsertInterval(meow,newInterval)) # [[1, 5], [6, 9]]
-print(InsertInterval(meow1,newInterval1)) # [[1, 2], [3, 10], [12, 16]]
-print(InsertInterval(meow2,newInterval2)) # [[0, 9]]
-print(InsertInterval(meow3,newInterval3)) # [[1, 7]]
-print(InsertInterval(meow46,newInterval4))# [[5, 7]]
-print(InsertInterval(meow5,newInterval5)) # [[1, 5]]
-print(InsertInterval(meow6,newInterval6)) # [[1, 2], [3, 17]]
-print(InsertInterval(meow7,newInterval7)) # [[1, 2], [4, 10], [12, 16]]
-print(InsertInterval(meow8,newInterval8)) # [[1, 5], [6, 8]]
+print(InsertInterval(test,newInterval)) # [[1, 5], [6, 9]]
+print(InsertInterval(test1,newInterval1)) # [[1, 2], [3, 10], [12, 16]]
+print(InsertInterval(test2,newInterval2)) # [[0, 9]]
+print(InsertInterval(test3,newInterval3)) # [[1, 7]]
+print(InsertInterval(test46,newInterval4))# [[5, 7]]
+print(InsertInterval(test5,newInterval5)) # [[1, 5]]
+print(InsertInterval(test6,newInterval6)) # [[1, 2], [3, 17]]
+print(InsertInterval(test7,newInterval7)) # [[1, 2], [4, 10], [12, 16]]
+print(InsertInterval(test8,newInterval8)) # [[1, 5], [6, 8]]
 

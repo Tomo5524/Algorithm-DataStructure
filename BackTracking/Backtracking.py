@@ -104,7 +104,7 @@ def dfs(grid,r,c):
  [0, 0, 0, 0, 0, 0, 0, 1, 4, 5, 0, 0, 0],
  [0, 0, 0, 0, 0, 0, 0, 2, 3, 0, 0, 0, 0]]
 
-meow = [[0,0,1,0,0,0,0,1,0,0,0,0,0],
+test = [[0,0,1,0,0,0,0,1,0,0,0,0,0],
         [0,0,0,0,0,0,0,1,1,1,0,0,0],
         [0,1,1,0,1,0,0,0,0,0,0,0,0],
         [0,1,0,0,1,1,0,0,1,0,1,0,0],
@@ -114,7 +114,7 @@ meow = [[0,0,1,0,0,0,0,1,0,0,0,0,0],
         [0,0,0,0,0,0,0,1,1,0,0,0,0]]
 
 print("lkjfsjdf")
-print(MaxAreaofIsland(meow))
+print(MaxAreaofIsland(test))
 
 # Ball BFS
 
@@ -326,13 +326,13 @@ def combinationSum(arr,target):
 ##    
 ##    return ans
 
-meow= [2,3,6,7] # t,7
-meow1 = [2,3,5] # t,8
-meow2 = [8,7,4,3] # t,11
+test= [2,3,6,7] # t,7
+test1 = [2,3,5] # t,8
+test2 = [8,7,4,3] # t,11
 
-print(combinationSum(meow,7))
-print(combinationSum(meow1,8))
-print(combinationSum(meow2,11))
+print(combinationSum(test,7))
+print(combinationSum(test1,8))
+print(combinationSum(test2,11))
 
 
 ############       return islands
@@ -383,7 +383,7 @@ graph = [[1,1,1],
 ##        [1, 0, 0, 1, 1]]
 
 print(returnIslands(graph))
-print('meow')
+print('test')
 
 # NQueen problem
 
@@ -696,8 +696,8 @@ def permutation(nums):
     return res
 
 
-meow = [1,2,3]
-print(permutation(meow))
+test = [1,2,3]
+print(permutation(test))
 
 
 # subset
@@ -722,9 +722,9 @@ def subset(arr):
     return res
     
 
-meow = [1,2,3]
+test = [1,2,3]
 # [ [3],[1],[2],[1,2,3],[1,3],[2,3],[1,2],[]]
-print(subset(meow))
+print(subset(test))
 
 def returnsubset(arr):
 
@@ -741,10 +741,10 @@ def createSubset(arr,res,sub,ind):
         createSubset(arr,res,sub+[i],i+1)
         
 
-meow = [1,2,3]
+test = [1,2,3]
 # [ [],[1],[1,2],[1,2,3],[1,3],[2],[2,3],[3]]
 # [ [3],[1],[2],[1,2,3],[1,3],[2,3],[1,2],[]]
-#print(returnsubset(meow))
+#print(returnsubset(test))
 
 ##########################################################
 

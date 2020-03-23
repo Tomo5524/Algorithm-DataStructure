@@ -3,7 +3,8 @@ from collections import Counter
 import heapq
 
 # 621. Task Scheduler
-
+def leastInterval(tasks):
+    pass
 
 ["A","A","A","B","B","B"] n = 2
 ["A","B","C","A","B","C","D","E","F","G"] n  = 2
@@ -59,9 +60,9 @@ class KthLargest:
         return self.subnum[0]
 
 
-meow = [4, 5, 8, 2]
+test = [4, 5, 8, 2]
 k = 3
-kthLargest = KthLargest(meow, k)
+kthLargest = KthLargest(test, k)
 print('kthLargest')
 print(kthLargest.add(3))
 print(kthLargest.add(5))
@@ -72,9 +73,9 @@ print(kthLargest.add(4))
 # ["KthLargest","add","add","add","add","add"]
 # [[1,[]],[-3],[-2],[-4],[0],[4]]
 
-meow1 = []
+test1 = []
 k1 = 1
-kthLargest = KthLargest(meow1, k1)
+kthLargest = KthLargest(test1, k1)
 print('kthLargest')
 print(kthLargest.add(-3))
 print(kthLargest.add(-2))
@@ -103,24 +104,24 @@ def TopKFrequentElements(nums,k):
     # wont work for edge case, [-1,-1], it will return 2 instead of 1
     # return heapq.nlargest(k, c.values(), key=c.get)  # get keys based on values
 
-meow = [4, 1, -1, 2, -1, 2, 3]  # k =2
+test = [4, 1, -1, 2, -1, 2, 3]  # k =2
 k_test = 2
-meow1 = [1]
+test1 = [1]
 k1 = 1
-meow2 = [1, 2]
+test2 = [1, 2]
 k2 = 2
-meow3 = [3, 0, 1, 0]
+test3 = [3, 0, 1, 0]
 k3 = 1  # doesnt work for heapq.nlargest(k,c.values(),key=c.get)
-meow4 = [1, 1, 1, 2, 2, 3]
+test4 = [1, 1, 1, 2, 2, 3]
 k4 = 2
 nums = [-1,-1]
 k = 1
 
-print(TopKFrequentElements(meow, k_test))
-print(TopKFrequentElements(meow1, k1))
-print(TopKFrequentElements(meow2, k2))
-print(TopKFrequentElements(meow3, k3))
-print(TopKFrequentElements(meow4, k4))
+print(TopKFrequentElements(test, k_test))
+print(TopKFrequentElements(test1, k1))
+print(TopKFrequentElements(test2, k2))
+print(TopKFrequentElements(test3, k3))
+print(TopKFrequentElements(test4, k4))
 print(TopKFrequentElements(nums,k))
 #arr = sorted(dic, key=dic.get, reverse=True)
 
@@ -163,17 +164,17 @@ def topKFrequent(arr,k):
 
     return res
 
-meow = ["i", "love", "leetcode", "i", "love", "coding"]
+test = ["i", "love", "leetcode", "i", "love", "coding"]
 k = 2
-meow1 = ["the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"]
+test1 = ["the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"]
 k1 = 4
-meow2 =["i", "love", "leetcode", "i", "love", "coding"]
+test2 =["i", "love", "leetcode", "i", "love", "coding"]
 k2 = 3
 
 print()
-print(topKFrequent(meow,k))
-print(topKFrequent(meow1,k1))
-print(topKFrequent(meow2,k2))
+print(topKFrequent(test,k))
+print(topKFrequent(test1,k1))
+print(topKFrequent(test2,k2))
 
 # 373. Find K Pairs with Smallest Sums
 
@@ -226,16 +227,16 @@ def kSmallestPairs(n1,n2,k):
 n1 = [1, 7, 11]
 n2 = [2, 4, 6]
 k = 3
-meow1 = [1, 1, 2]
-meow2 = [1, 2, 3]
+test1 = [1, 1, 2]
+test2 = [1, 2, 3]
 k1 = 2
-meow3 = [1, 1, 2]
-meow4 = [1, 2, 3]
+test3 = [1, 1, 2]
+test4 = [1, 2, 3]
 k2 = 10 # [[1,1],[1,1],[2,1],[1,2],[1,2],[2,2],[1,3],[1,3],[2,3]]
 nums1 = [1,2]
 nums2 = [3]
 k3 = 3
 print(kSmallestPairs(n1, n2, k))
-print(kSmallestPairs(meow1, meow2, k1))
-print(kSmallestPairs(meow3, meow4, k2))
+print(kSmallestPairs(test1, test2, k1))
+print(kSmallestPairs(test3, test4, k2))
 print(kSmallestPairs(nums1, nums2, k3))

@@ -495,12 +495,12 @@ def expand(S):
     res.sort()
     return res
 
-meow = "{a,b}c{d,e}f" # ["acdf","acef","bcdf","bcef"]
-meow1 = "abcd"
-meow2 = "{a,b}{z,x,y}"
-print(expand(meow))
-print(expand(meow1))
-print(expand(meow2))
+test = "{a,b}c{d,e}f" # ["acdf","acef","bcdf","bcef"]
+test1 = "abcd"
+test2 = "{a,b}{z,x,y}"
+print(expand(test))
+print(expand(test1))
+print(expand(test2))
 print()
 
 # 11/1/2019
@@ -781,11 +781,11 @@ def getMaximumGold(grid):
 
     return max_gold
 
-meow = [[0,6,0],
+test = [[0,6,0],
         [5,8,7],
         [0,9,0]]
 
-print(getMaximumGold(meow))
+print(getMaximumGold(test))
 print()
 
 # 1110. Delete Nodes And Return Forest

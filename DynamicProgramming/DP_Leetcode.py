@@ -2,19 +2,64 @@
 
 # Leetcode
 
+# 3/21/2020
+# 807. Max Increase to Keep City Skyline
+def maxIncreaseKeepingSkyline(grid):
+
+# Time Complexity: O(N2)
+    if not grid: return 0
+
+    row_maxes = []
+    col_maxes = []
+
+    # get max from each row
+    for i in range(len(grid)):
+        # col_maxes.append(max(grid[i]))
+        row_max = float('-inf')
+        col_max = float('-inf')
+        for j in range(len(grid[i])):
+            # get max from each row and colum
+            row_max = max(row_max, grid[i][j])
+            col_max = max(col_max, grid[j][i])
+
+        row_maxes.append(row_max)
+        col_maxes.append(col_max)
+
+    total = 0
+    for i in range(len(grid)):
+        for j in range(len(grid[i])):
+            total += min(row_maxes[i], col_maxes[j]) - grid[i][j]
+            # dont need these lines as we look for the increase.
+            # if there is no increase possible, we just subtract current grid and min(rowmax or colmax) e.g. grid[1][1], 4 will remain intact
+            # biggest = max(row_maxes[i], col_maxes[j])
+            # if grid[i][j] < biggest:
+            #     total += min(row_maxes[i], col_maxes[j]) - grid[i][j]
+
+    return total
+
+test = [[3,0,8,4],
+        [2,4,5,7],
+        [9,2,6,3],
+        [0,3,1,0]]
+
+test1 = [[0,0,0],[0,0,0],[0,0,0]]
+
+print(maxIncreaseKeepingSkyline(test))
+print(maxIncreaseKeepingSkyline(test1))
+
 # 11/18/2019
 # 518. Coin Change 2
 def change(amount,coins):
 
     """
-    key is to divide whole problem into sub problems
-    and think about base case of brute force
-    algorithm
-    1, find number of combinations that make up current amount with current coin
-    2, create dp and find out how many combinations required to make up current amount
-        # to make up 0, there is only one combination which is 0
-    3,
-    """
+        key is to divide whole problem into sub problems
+        and think about base case of brute force
+        algorithm
+        1, find number of combinations that make up current amount with current coin
+        2, create dp and find out how many combinations required to make up current amount
+            # to make up 0, there is only one combination which is 0
+        3,
+        """
 
     # dp
     # Time complexity: O(N×amount), where N is a length of coins array.
@@ -117,12 +162,12 @@ def maximalSquare(matrix):
 
     return max_area * max_area
 
-meow = [["1","0","1","0","0"],
+test = [["1","0","1","0","0"],
         ["1","0","1","1","1"],
         ["1","1","1","1","1"],
         ["1","0","0","1","0"]] # 4
 
-meow1 = [["0","0","0","1","0","1","1","1"],
+test1 = [["0","0","0","1","0","1","1","1"],
         ["0","1","1","0","0","1","0","1"],
         ["1","0","1","1","1","1","0","1"],
         ["0","0","0","1","0","0","0","0"],
@@ -132,8 +177,8 @@ meow1 = [["0","0","0","1","0","1","1","1"],
         ["0","1","0","0","1","1","0","0"],
         ["1","0","0","1","0","0","0","0"]] # 1
 
-print(maximalSquare(meow))
-print(maximalSquare(meow1))
+print(maximalSquare(test))
+print(maximalSquare(test1))
 print()
 
 # Solve it with navie recurive function first
@@ -232,14 +277,14 @@ def canPartition(nums):
     memo = {}
     return dfs(nums,t)
 
-meow = [1,5,11,5]
-meow2 = [1,2,3,5]
-meow4 = [28,63,95,30,39,16,36,44,37,100,61,73,32,71,100,2,37,60,23,71,53,70,69,82,97,43,16,33,29,5,97,32,29,78,93,59,37,88,89,79,75,9,74,32,81,12,34,13,16,15,16,40,90,70,17,78,54,81,18,92,75,74,59,18,66,62,55,19,2,67,30,25,64,84,25,76,98,59,74,87,5,93,97,68,20,58,55,73,74,97,49,71,42,26,8,87,99,1,16,79]
-meow3 = [23,13,11,7,6,5,5]
-print(canPartition(meow))
-print(canPartition(meow2))
-print(canPartition(meow3))
-print(canPartition(meow4))
+test = [1,5,11,5]
+test2 = [1,2,3,5]
+test4 = [28,63,95,30,39,16,36,44,37,100,61,73,32,71,100,2,37,60,23,71,53,70,69,82,97,43,16,33,29,5,97,32,29,78,93,59,37,88,89,79,75,9,74,32,81,12,34,13,16,15,16,40,90,70,17,78,54,81,18,92,75,74,59,18,66,62,55,19,2,67,30,25,64,84,25,76,98,59,74,87,5,93,97,68,20,58,55,73,74,97,49,71,42,26,8,87,99,1,16,79]
+test3 = [23,13,11,7,6,5,5]
+print(canPartition(test))
+print(canPartition(test2))
+print(canPartition(test3))
+print(canPartition(test4))
 
 
 # 10/25/2019
@@ -442,27 +487,27 @@ def jump(nums):
 
     return dfs(nums,0,len(nums)-1)
 
-meow = [1, 3, 1, 2, 0, 1]
-meow1 = [1, 2, 1, 0, 0]
-meow2 = [2, 2, 0, 0]
-meow3 = [1, 1, 1, 1, 0, 1]
-meow4 = [2,0]
-meow5 =[2,0,0]
-meow6 = [0]
-meow7 = [2,5,0,0,0,0]
-meow8 = [3,2,1,0,4]
-meow9 = [2,3,1,1,4]
+test = [1, 3, 1, 2, 0, 1]
+test1 = [1, 2, 1, 0, 0]
+test2 = [2, 2, 0, 0]
+test3 = [1, 1, 1, 1, 0, 1]
+test4 = [2,0]
+test5 =[2,0,0]
+test6 = [0]
+test7 = [2,5,0,0,0,0]
+test8 = [3,2,1,0,4]
+test9 = [2,3,1,1,4]
 
-# print(jump(meow)) # True
-# print(jump(meow1)) # False
-# print(jump(meow2)) # True
-# print(jump(meow3)) # False
-# print(jump(meow4)) # True
-# print(jump(meow5)) # True
-# print(jump(meow6)) # True
-# print(jump(meow7)) # True
-# print(jump(meow8)) # False
-print(jump(meow9)) # True
+# print(jump(test)) # True
+# print(jump(test1)) # False
+# print(jump(test2)) # True
+# print(jump(test3)) # False
+# print(jump(test4)) # True
+# print(jump(test5)) # True
+# print(jump(test6)) # True
+# print(jump(test7)) # True
+# print(jump(test8)) # False
+print(jump(test9)) # True
 print()
 
 # 55. Jump Game
@@ -517,27 +562,27 @@ def canJump(nums):
 
     return furthest_so_far >= len(nums)-1
 
-meow = [1, 3, 1, 2, 0, 1]
-meow1 = [1, 2, 1, 0, 0]
-meow2 = [2, 2, 0, 0]
-meow3 = [1, 1, 1, 1, 0, 1]
-meow4 = [2,0]
-meow5 =[2,0,0]
-meow6 = [0]
-meow7 = [2,5,0,0,0,0]
-meow8 = [3,2,1,0,4]
-meow9 = [2,3,1,1,4]
+test = [1, 3, 1, 2, 0, 1]
+test1 = [1, 2, 1, 0, 0]
+test2 = [2, 2, 0, 0]
+test3 = [1, 1, 1, 1, 0, 1]
+test4 = [2,0]
+test5 =[2,0,0]
+test6 = [0]
+test7 = [2,5,0,0,0,0]
+test8 = [3,2,1,0,4]
+test9 = [2,3,1,1,4]
 
-print(canJump(meow)) # True
-print(canJump(meow1)) # False
-print(canJump(meow2)) # True
-print(canJump(meow3)) # False
-print(canJump(meow4)) # True
-print(canJump(meow5)) # True
-print(canJump(meow6)) # True
-print(canJump(meow7)) # True
-print(canJump(meow8)) # False
-print(canJump(meow9)) # True
+print(canJump(test)) # True
+print(canJump(test1)) # False
+print(canJump(test2)) # True
+print(canJump(test3)) # False
+print(canJump(test4)) # True
+print(canJump(test5)) # True
+print(canJump(test6)) # True
+print(canJump(test7)) # True
+print(canJump(test8)) # False
+print(canJump(test9)) # True
 print()
 
 
@@ -616,22 +661,22 @@ def coinChange(coins,amount):
     #
     # return len(min(res, key=len)) if res else -1
 
-meow = [1,2,5]
+test = [1,2,5]
 amount = 6
-meow1 = [2,5,10,1]
+test1 = [2,5,10,1]
 amount1 = 27
-meow2 = [2]
+test2 = [2]
 amount2 = 3
-meow3 = [186,419,83,408]
+test3 = [186,419,83,408]
 amount3 = 6249
-meow4 = [1,2,5]
+test4 = [1,2,5]
 amount4 = 11
 
-print(coinChange(meow,amount))
-print(coinChange(meow1,amount1))
-print(coinChange(meow2,amount2))
-# print(coinChange(meow3,amount3))
-print(coinChange(meow4,amount4))
+print(coinChange(test,amount))
+print(coinChange(test1,amount1))
+print(coinChange(test2,amount2))
+# print(coinChange(test3,amount3))
+print(coinChange(test4,amount4))
 
 # 10/23/2019
 
@@ -730,21 +775,21 @@ def wordBreak(s, wordDict):
 
 
 s = "leetcode"
-meow  = ["leet", "code"] # True
+test  = ["leet", "code"] # True
 s1 = "cars"
-meow1 = ["car","ca","rs"] # True
+test1 = ["car","ca","rs"] # True
 s2 = "cbca"
-meow2 = ["bc","ca"] # False
+test2 = ["bc","ca"] # False
 s3 = "bb"
-meow3 = ["a","b","bbb","bbbb"] # a = bbb, a[0:2] = bb so it is True
+test3 = ["a","b","bbb","bbbb"] # a = bbb, a[0:2] = bb so it is True
 s4 = "catsandog"
-meow4 = ["cats", "dog", "sand", "and", "cat"] # False
+test4 = ["cats", "dog", "sand", "and", "cat"] # False
 print()
-print(wordBreak(s,meow))
-print(wordBreak(s1,meow1))
-print(wordBreak(s2,meow2))
-print(wordBreak(s3,meow3))
-print(wordBreak(s4,meow4))
+print(wordBreak(s,test))
+print(wordBreak(s1,test1))
+print(wordBreak(s2,test2))
+print(wordBreak(s3,test3))
+print(wordBreak(s4,test4))
 print()
 
 # 213. House Robber II
@@ -827,23 +872,23 @@ def HouseRobber(nums):
     # return GetMoney(nums,0)
 
 
-meow = [1, 2, 3, 1]  # 4
-meow1 = [2, 7, 9, 3, 1]  # 12
-meow2 = [1, 2]  # 2
-meow3 = [2, 1, 1, 2]  # 4
-meow4 = [0, 0]  # 0
-meow5 = [1, 1]  # 1
-meow6 = [3, 1, 2, 5, 4, 2]  # 10
-meow7 = [3, -1,-1, -1, -1, 2]
+test = [1, 2, 3, 1]  # 4
+test1 = [2, 7, 9, 3, 1]  # 12
+test2 = [1, 2]  # 2
+test3 = [2, 1, 1, 2]  # 4
+test4 = [0, 0]  # 0
+test5 = [1, 1]  # 1
+test6 = [3, 1, 2, 5, 4, 2]  # 10
+test7 = [3, -1,-1, -1, -1, 2]
 
-print(HouseRobber(meow))
-print(HouseRobber(meow1))
-print(HouseRobber(meow2))
-print(HouseRobber(meow3))
-print(HouseRobber(meow4))
-print(HouseRobber(meow5))
-print(HouseRobber(meow6))
-print(HouseRobber(meow7))
+print(HouseRobber(test))
+print(HouseRobber(test1))
+print(HouseRobber(test2))
+print(HouseRobber(test3))
+print(HouseRobber(test4))
+print(HouseRobber(test5))
+print(HouseRobber(test6))
+print(HouseRobber(test7))
 print()
 
 
@@ -919,18 +964,18 @@ def lengthOfLIS(nums):
 
     return max(cache)
 
-meow = [10,9,2,5,3,4]
-meow1 = [4,10,4,3,8,9]
-meow2 = [1,3,6,7,9,4,10,5,6]
-meow3 = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15]
-meow4 = [0,2,6,9,11,15]
-meow5 = [10,9,2,5,3,7,101,18]
-print(lengthOfLIS(meow))
-print(lengthOfLIS(meow1))
-print(lengthOfLIS(meow2))
-print(lengthOfLIS(meow3))
-print(lengthOfLIS(meow4))
-print(lengthOfLIS(meow5))
+test = [10,9,2,5,3,4]
+test1 = [4,10,4,3,8,9]
+test2 = [1,3,6,7,9,4,10,5,6]
+test3 = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15]
+test4 = [0,2,6,9,11,15]
+test5 = [10,9,2,5,3,7,101,18]
+print(lengthOfLIS(test))
+print(lengthOfLIS(test1))
+print(lengthOfLIS(test2))
+print(lengthOfLIS(test3))
+print(lengthOfLIS(test4))
+print(lengthOfLIS(test5))
 print()
 
 
@@ -971,8 +1016,8 @@ def maxSubArray(nums):
     # return biggest_sofar
 
 
-meow = [-2,1,-3,4,-1,2,1,-5,4]
-print(maxSubArray(meow))
+test = [-2,1,-3,4,-1,2,1,-5,4]
+print(maxSubArray(test))
 print()
 
 # 62. Unique Paths

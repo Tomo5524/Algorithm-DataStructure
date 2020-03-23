@@ -110,20 +110,20 @@ def alienOrder(words):
     # how to detect cycle is to compare the length of result and indgree array
     return res if len(res) == len(indegree) else None
 
-meow = ["wrt", "wrf", "er", "ett", "rftt"] # w -> e -> r -> t -> f
-meow1 = ["z","x","z"]
-meow2 = ["a","zy","zx"] # order doesnt matter
-meow3 = ["wrtkj","wrt"]
-meow4 = ["wrt","wrtkj"]
-meow5 = ["za","zb","ca","cb"] # "abzc"
-meow6 = ['sbde','sbax']
-print(alienOrder(meow))
-print(alienOrder(meow1))
-print(alienOrder(meow2))
-print(alienOrder(meow3))
-print(alienOrder(meow4))
-print(alienOrder(meow5))
-print(alienOrder(meow6))
+test = ["wrt", "wrf", "er", "ett", "rftt"] # w -> e -> r -> t -> f
+test1 = ["z","x","z"]
+test2 = ["a","zy","zx"] # order doesnt matter
+test3 = ["wrtkj","wrt"]
+test4 = ["wrt","wrtkj"]
+test5 = ["za","zb","ca","cb"] # "abzc"
+test6 = ['sbde','sbax']
+print(alienOrder(test))
+print(alienOrder(test1))
+print(alienOrder(test2))
+print(alienOrder(test3))
+print(alienOrder(test4))
+print(alienOrder(test5))
+print(alienOrder(test6))
 print()
 
 
@@ -217,18 +217,18 @@ def findOrder(numCourses,prerequisites):
     return res
 
 courses = 4
-meow = [[1,0],[2,0],[3,1],[3,2]] # #  [0,1,2,3] or [0,2,1,3]
+test = [[1,0],[2,0],[3,1],[3,2]] # #  [0,1,2,3] or [0,2,1,3]
 c1 = 2
-meow1 = [[1,0]]
+test1 = [[1,0]]
 c2 = 3
-meow2 = [[0,2],[1,2],[2,0]]
+test2 = [[0,2],[1,2],[2,0]]
 c3 = 2
-meow3 = [[0,1],[1,0]]
+test3 = [[0,1],[1,0]]
 
-print(findOrder(courses,meow))
-print(findOrder(c1,meow1))
-print(findOrder(c2,meow2))
-print(findOrder(c3,meow3))
+print(findOrder(courses,test))
+print(findOrder(c1,test1))
+print(findOrder(c2,test2))
+print(findOrder(c3,test3))
 print()
 
 
@@ -289,10 +289,10 @@ def findRedundantConnection(edges):  # detect loop and remove it
     return None
 
 
-meow = [[1, 2], [1, 3], [2, 3]]
-meow1 = [[1, 2], [2, 3], [3, 4], [1, 4], [1, 5]]
-# print(findRedundantConnection(meow))
-print(findRedundantConnection(meow1))
+test = [[1, 2], [1, 3], [2, 3]]
+test1 = [[1, 2], [2, 3], [3, 4], [1, 4], [1, 5]]
+# print(findRedundantConnection(test))
+print(findRedundantConnection(test1))
 print()
 
 # 547. Friend Circles
@@ -337,17 +337,17 @@ def findCircleNum(M):
 
     return cnt
 
-meow = [[1,1,0],
+test = [[1,1,0],
         [1,1,0],
         [0,0,1]] # 2
 
-meow1 = [[1,1,0],
+test1 = [[1,1,0],
         [1,1,1],
         [0,1,1]] # 1
 
 print('findCircleNum')
-print(findCircleNum(meow))
-print(findCircleNum(meow1))
+print(findCircleNum(test))
+print(findCircleNum(test1))
 print()
 
 # 743. Network Delay Time
@@ -364,7 +364,7 @@ def networkDelayTime(times, N, K):
        1, return the biggest path from node K
        # tricky part is that
         biggest path is actually shortest path out of all biggest paths from node K
-        e,g, in meow4, from K(1) to 3, path from 1 to 3 is 7
+        e,g, in test4, from K(1) to 3, path from 1 to 3 is 7
         but path from 1 to 2 to 3 is 4 which is shortest out of biggest path
        2, crete dict that keeps track of each node path and holds smallest path (3:7 and 3:4) holds 3:4
        3, if length of dict equals N return max path
@@ -394,27 +394,27 @@ def networkDelayTime(times, N, K):
     return max_cost if len(dst) == N else -1
 
 
-meow  =[[2,1,1],[2,3,1],[3,4,1]] # 2
+test  =[[2,1,1],[2,3,1],[3,4,1]] # 2
 n = 4
 k = 2
-meow1 = [[1,2,1],[2,1,3]] # 3
+test1 = [[1,2,1],[2,1,3]] # 3
 n1 = 2
 k1 = 2
-meow2 = [[1,2,1],[2,3,7],[1,3,4],[2,1,2]] # 4
+test2 = [[1,2,1],[2,3,7],[1,3,4],[2,1,2]] # 4
 n2 = 3
 k2 = 1
-meow3 = [[1,2,1]] # -1
+test3 = [[1,2,1]] # -1
 n3 = 2
 k3 = 2
-meow4 = [[1,2,1],[2,3,2],[1,3,7],[2,1,2]] # 3
+test4 = [[1,2,1],[2,3,2],[1,3,7],[2,1,2]] # 3
 n4 = 3
 k4 = 1
 print("networkDelayTime")
-print(networkDelayTime(meow,n,k))
-print(networkDelayTime(meow1,n1,k1))
-print(networkDelayTime(meow2,n2,k2))
-print(networkDelayTime(meow3,n3,k3))
-print(networkDelayTime(meow4,n4,k4)) # 3
+print(networkDelayTime(test,n,k))
+print(networkDelayTime(test1,n1,k1))
+print(networkDelayTime(test2,n2,k2))
+print(networkDelayTime(test3,n3,k3))
+print(networkDelayTime(test4,n4,k4)) # 3
 print()
 
 # 787. Cheapest Flights Within K Stops
@@ -452,36 +452,36 @@ def findCheapestPrice(n,flights,src,dst,k):
     return -1
 
 n = 3
-meow = [[0,1,100],[1,2,100],[0,2,500]]
+test = [[0,1,100],[1,2,100],[0,2,500]]
 src = 0
 dst = 2
 k = 0
-print(findCheapestPrice(n, meow,src, dst,k)) # 500
+print(findCheapestPrice(n, test,src, dst,k)) # 500
 n1 = 4
-meow1 = [[0,1,1],[0,2,5],[1,2,1],[2,3,1]]
+test1 = [[0,1,1],[0,2,5],[1,2,1],[2,3,1]]
 src1 = 0
 dst1 = 3
 k1 = 1
-print(findCheapestPrice(n1, meow1,src1, dst1,k1)) # 6
+print(findCheapestPrice(n1, test1,src1, dst1,k1)) # 6
 n2 = 2
-meow2 =[[0,1,2]]
+test2 =[[0,1,2]]
 src2 = 1
 dst2 = 0
 k2 = 0
-print(findCheapestPrice(n2, meow2,src2, dst2,k2)) # -1
+print(findCheapestPrice(n2, test2,src2, dst2,k2)) # -1
 n3 = 3
-meow3 = [[0,1,100],[1,2,100],[0,2,500]]
+test3 = [[0,1,100],[1,2,100],[0,2,500]]
 src3 = 0
 dst3 = 2
 k3 = 1
-print(findCheapestPrice(n3, meow3,src3, dst3,k3)) # 200
+print(findCheapestPrice(n3, test3,src3, dst3,k3)) # 200
 # when you are already in destination
 n4 = 3
-meow4 = [[0,1,100],[1,2,100],[0,2,500]]
+test4 = [[0,1,100],[1,2,100],[0,2,500]]
 src4 = 0
 dst4 = 0
 k4 = 1
-print(findCheapestPrice(n4, meow4,src4, dst4,k4)) # 0
+print(findCheapestPrice(n4, test4,src4, dst4,k4)) # 0
 
 
 from collections import defaultdict, deque
@@ -661,15 +661,15 @@ def countComponents(n, edges):
 
 # return sum(dfs(i) for i in range(n) if i not in visited)
 
-meow = [[0, 1], [1, 2], [3, 4]]
-meow1 = [[0, 1], [1, 2], [2, 3], [3, 4]]
-meow2 = [[1,0]] # 1
-meow3 = [[0,1],[1,2],[0,2],[3,4]]
+test = [[0, 1], [1, 2], [3, 4]]
+test1 = [[0, 1], [1, 2], [2, 3], [3, 4]]
+test2 = [[1,0]] # 1
+test3 = [[0,1],[1,2],[0,2],[3,4]]
 print("countComponents")
-print(countComponents(5,meow))
-print(countComponents(5,meow1))
-print(countComponents(2,meow2))
-print(countComponents(5,meow3))
+print(countComponents(5,test))
+print(countComponents(5,test1))
+print(countComponents(2,test2))
+print(countComponents(5,test3))
 
 # 797. All Paths From Source to Target
 
@@ -720,9 +720,9 @@ def allPathsSourceTarget(graph):
     #
     # return allpath
 
-meow = [[1, 2], [3], [3], []]
+test = [[1, 2], [3], [3], []]
 print('allPathsSourceTarget')
-print(allPathsSourceTarget(meow))
+print(allPathsSourceTarget(test))
 
 # detect cycle in directed graph
 # 207. Course Schedule
@@ -849,13 +849,13 @@ def eventualSafeNodes(graph):
 
     return res
 
-meow = [[1,2],[2,3],[5],[0],[5],[],[]] # [2,4,5,6]
-meow1 = [[],[0,2,3,4],[3],[4],[]] # [0,1,2,3,4]
-meow2 = [[4,9],[3,5,7],[0,3,4,5,6,8],[7,8,9],[5,6,7,8],[6,7,8,9],[7,9],[8,9],[9],[]]
+test = [[1,2],[2,3],[5],[0],[5],[],[]] # [2,4,5,6]
+test1 = [[],[0,2,3,4],[3],[4],[]] # [0,1,2,3,4]
+test2 = [[4,9],[3,5,7],[0,3,4,5,6,8],[7,8,9],[5,6,7,8],[6,7,8,9],[7,9],[8,9],[9],[]]
 # [0,1,2,3,4,5,6,7,8,9]
-print(eventualSafeNodes(meow))
-print(eventualSafeNodes(meow1))
-print(eventualSafeNodes(meow2))
+print(eventualSafeNodes(test))
+print(eventualSafeNodes(test1))
+print(eventualSafeNodes(test2))
 
 
 

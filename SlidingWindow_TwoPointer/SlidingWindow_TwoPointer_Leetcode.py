@@ -59,30 +59,30 @@ def minSubArrayLen(arr,s):
     # return 0 if smallest == len(arr)+1 else smallest
 
 #15
-meow = [1,2,3,4,5] # 5
+test = [1,2,3,4,5] # 5
 #4
-meow1 = [1,4,4] # 1
+test1 = [1,4,4] # 1
 #11
-meow2 = [1,2,3,4,5] # 3
+test2 = [1,2,3,4,5] # 3
 #7
-meow3 = [2,3,1,2,4,3]# 2
+test3 = [2,3,1,2,4,3]# 2
 #100
-meow4 = [] # 0
+test4 = [] # 0
 #213
-meow5 = [12,28,83,4,25,26,25,2,25,25,25,12] # 8
+test5 = [12,28,83,4,25,26,25,2,25,25,25,12] # 8
 #6
-meow6 = [10,2,3] # 1
+test6 = [10,2,3] # 1
 #3
-meow7 = [1,1] # 0
+test7 = [1,1] # 0
 
-print(minSubArrayLen(meow,15))
-print(minSubArrayLen(meow1,4))
-print(minSubArrayLen(meow2,11))
-print(minSubArrayLen(meow3,7))
-print(minSubArrayLen(meow4,100))
-print(minSubArrayLen(meow5,213))
-print(minSubArrayLen(meow6,6))
-print(minSubArrayLen(meow7,3))
+print(minSubArrayLen(test,15))
+print(minSubArrayLen(test1,4))
+print(minSubArrayLen(test2,11))
+print(minSubArrayLen(test3,7))
+print(minSubArrayLen(test4,100))
+print(minSubArrayLen(test5,213))
+print(minSubArrayLen(test6,6))
+print(minSubArrayLen(test7,3))
 
 
 # 11. Container With Most Water
@@ -240,16 +240,16 @@ def TrappingRainWater(heights):
     #
     # return max_water
 
-meow = [0,1,0,2,1,0,1,3,2,1,2,1]
-meow1 = [2,0,2]
-meow2 = [4,2,3]
-meow3 = [2,0,1,0,3,1,0,2,2,0,5]
+test = [0,1,0,2,1,0,1,3,2,1,2,1]
+test1 = [2,0,2]
+test2 = [4,2,3]
+test3 = [2,0,1,0,3,1,0,2,2,0,5]
 
 print()
-print(TrappingRainWater(meow))
-print(TrappingRainWater(meow1))
-print(TrappingRainWater(meow2))
-print(TrappingRainWater(meow3))
+print(TrappingRainWater(test))
+print(TrappingRainWater(test1))
+print(TrappingRainWater(test2))
+print(TrappingRainWater(test3))
 
 # 3. Longest Substring Without Repeating Characters
 """
@@ -323,26 +323,26 @@ def lengthOfLongestSubstring(s):
     # return longest
     #return cnt if cnt > longest else longest
 
-meow = "abcabcbb" # 3
-meow1 = " " # 1
-meow2 = "pwwkew" # 3
-meow3 = "au" # 2
-meow4 = "dvdf" # 3
-meow5 = "abba" # 2
-meow6 = "abbbbbba" # 2
-meow7 = ""
-meow8 = "aab"
+test = "abcabcbb" # 3
+test1 = " " # 1
+test2 = "pwwkew" # 3
+test3 = "au" # 2
+test4 = "dvdf" # 3
+test5 = "abba" # 2
+test6 = "abbbbbba" # 2
+test7 = ""
+test8 = "aab"
 
 print()
-print(lengthOfLongestSubstring(meow))
-print(lengthOfLongestSubstring(meow1))
-print(lengthOfLongestSubstring(meow2))
-print(lengthOfLongestSubstring(meow3))
-print(lengthOfLongestSubstring(meow4))
-print(lengthOfLongestSubstring(meow5))
-print(lengthOfLongestSubstring(meow6))
-print(lengthOfLongestSubstring(meow7))
-print(lengthOfLongestSubstring(meow8))
+print(lengthOfLongestSubstring(test))
+print(lengthOfLongestSubstring(test1))
+print(lengthOfLongestSubstring(test2))
+print(lengthOfLongestSubstring(test3))
+print(lengthOfLongestSubstring(test4))
+print(lengthOfLongestSubstring(test5))
+print(lengthOfLongestSubstring(test6))
+print(lengthOfLongestSubstring(test7))
+print(lengthOfLongestSubstring(test8))
 
 # 76. Minimum Window Substring
 

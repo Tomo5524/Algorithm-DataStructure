@@ -4,8 +4,8 @@
 def twoSum(nums, target):
     """
     algorithm
-    1, subtract each value with target
-    2, if current num is already in dictionary, we found two values whose sum equals target
+    1, subtract each value with target to store each value subtracted by target
+    2, if target - curval  is already in dictionary, we found two values whose sum equals target
     3,
     """
 
@@ -18,7 +18,12 @@ def twoSum(nums, target):
 
     return None
 
-
+    # brute force TC: O(n2)
+    # for i in range(len(nums)):
+    #     for j in range(i+1,len(nums)):
+    #         cur_sum = nums[i] + nums[j]
+    #         if cur_sum == target:
+    #             return [nums[i],nums[j]]
 
 nums = [2, 7, 11, 15]
 target = 9
@@ -26,6 +31,7 @@ n = [3,2,4]
 t = 6
 n1 = [1,6,-7,4,3]
 t1 = 10
+print('twosum')
 print(twoSum(nums,target))
 print(twoSum(n,t))
 print(twoSum(n1,t1))
@@ -49,8 +55,8 @@ def repeatedSubstringPattern(s):
     """
 
     # aba will be true if I do not remove 1 and -1
-    ss = s+s[1:-1]
-    return s in ss
+    # ss = s+s[1:-1]
+    # return s in ss
 
     # brute force
     # time complexity: O(n*m)
@@ -69,10 +75,13 @@ test = "abab"
 test1 = "aba"
 test2 = "abcabcabcabc"
 test3 = "helloworld"
+test4 = 'daeef'
+print('repeatedSubstringPattern')
 print(repeatedSubstringPattern(test))
 print(repeatedSubstringPattern(test1))
 print(repeatedSubstringPattern(test2))
 print(repeatedSubstringPattern(test3))
+print(repeatedSubstringPattern(test4))
 print()
 
 # 11/17/2019
@@ -114,6 +123,10 @@ def decodeString(s):
 
     return ''.join(stack)
 
+    # stack = []
+    # for i in range(len(s)):
+    #     if s[i] == "]":
+    #         if stack.pop() ==
 
 test = "3[a]2[bc]" # return "aaabcbc".
 test1 = "3[a2[c]]" # return "accaccacc".
@@ -174,7 +187,7 @@ class NestedIterator:
             # be careful with index
             top = stack.popleft()
             if len(top) == 1:
-                # # check if value on top is integer r not
+                # # check if value on top is integer
                 if type(top[0]) == int:
                     self.value = top[0]
                     return True
@@ -227,6 +240,7 @@ def countSubstrings(s):
     3, basically left is iterated in range(0, len(s)), and right is either left + 0 or left + 1
     """
 
+    # time complexity?
     res = 0
     for i in range(len(s)):
         for j in range(2):
@@ -271,9 +285,9 @@ test2 = 'abcaaeddde'
 test3 = "abcaa"
 
 print("countSubstrings")
-print(countSubstrings(test)) # 3
-print(countSubstrings(test1)) # 6
-print(countSubstrings(test2)) # 15
+# print(countSubstrings(test)) # 3
+# print(countSubstrings(test1)) # 6
+# print(countSubstrings(test2)) # 15
 print(countSubstrings(test3)) # 6
 print()
 
@@ -309,6 +323,7 @@ def fourSum(nums,target):
                 else:
                     r -= 1
 
+        # if n is not 2, else statement takes place and for loop starts off with 0
         else:
             for i in range(len(nums)):
                 if i == 0 or (i > 0 and nums[i] != nums[i-1]):
@@ -322,6 +337,7 @@ def fourSum(nums,target):
     getFourSum(nums,target,4,sub,res)
     return res
 
+    # Time complexity O(n4)
     # brute force
     # res = []
     # nums.sort()
@@ -339,6 +355,7 @@ def fourSum(nums,target):
     #
     # return
 
+print("Four sum")
 # print(fourSum([-3,-2,-1,0,0,1,2,3],0)) # [[-3,-2,2,3],[-3,-1,1,3],[-3,0,0,3],[-3,0,1,2],[-2,-1,0,3],[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
 print(fourSum([1,0,-1,0,-2,2],0)) # [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
 print(fourSum([-1,0,-5,-2,-2,-4,0,1,-2],-9)) # [[-5,-4,-1,1],[-5,-4,0,0],[-5,-2,-2,0],[-4,-2,-2,-1]]

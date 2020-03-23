@@ -193,7 +193,7 @@ board1 = [["a","b"]] # true
 word3 = "ba"
 board2 = [["b"],["a"],["b"],["b"],["a"]] # False
 word4 = "baa"
-meow =[["C","A","A"],["A","A","A"],["B","C","D"]]
+test =[["C","A","A"],["A","A","A"],["B","C","D"]]
 s = "AAB"
 # [["a","b"],["c","d"]]
 # "cdba"
@@ -202,7 +202,7 @@ print(exist(board,word1))
 print(exist(board,word2))
 print(exist(board1,word3))
 print(exist(board2,word4))
-print(exist(meow,s)) # test case 6
+print(exist(test,s)) # test case 6
 print()
 
 # 10/21/2019
@@ -275,17 +275,17 @@ def longestIncreasingPath(matrix):
     #
     # return LIP
 
-meow = [[9,9,4],
+test = [[9,9,4],
         [6,6,8],
         [2,1,1]]
 
-meow1 = [[7,6,1,1],
+test1 = [[7,6,1,1],
          [2,7,6,0],
          [1,3,5,1],
          [6,6,3,2]]
 
-print(longestIncreasingPath(meow))
-print(longestIncreasingPath(meow1))
+print(longestIncreasingPath(test))
+print(longestIncreasingPath(test1))
 print()
 
 
@@ -580,7 +580,7 @@ def maxAreaOfIsland(grid):
     #print(res)
     return cnt
 
-meow = [[0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+test = [[0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
         [0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0],
@@ -589,12 +589,12 @@ meow = [[0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0]]
 
-meow1 = [[0,1]]
-meow2 = [[1,1,0,0,0],[1,1,0,0,0],[0,0,0,1,1],[0,0,0,1,1]]
+test1 = [[0,1]]
+test2 = [[1,1,0,0,0],[1,1,0,0,0],[0,0,0,1,1],[0,0,0,1,1]]
 print()
-print(maxAreaOfIsland(meow))
-print(maxAreaOfIsland(meow1))
-print(maxAreaOfIsland(meow2))
+print(maxAreaOfIsland(test))
+print(maxAreaOfIsland(test1))
+print(maxAreaOfIsland(test2))
 
 
 """

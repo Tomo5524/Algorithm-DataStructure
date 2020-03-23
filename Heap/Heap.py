@@ -64,14 +64,14 @@ def minheapify(arr, root):
 
     return arr
 
-meow = [1, 3, 5, 7, 9, 2, 4, 6, 8, 0]
-meow1 = [1, 9, 8, 2, 3, 10, 14, 7, 16, 4]
+test = [1, 3, 5, 7, 9, 2, 4, 6, 8, 0]
+test1 = [1, 9, 8, 2, 3, 10, 14, 7, 16, 4]
 print('min heap')
-print("before min heap: ", meow)
-print("before min heap: ", meow1)
+print("before min heap: ", test)
+print("before min heap: ", test1)
 print()
-print("after min heap: ", build_min_heap(meow))
-print("after min heap: ", build_min_heap(meow1))
+print("after min heap: ", build_min_heap(test))
+print("after min heap: ", build_min_heap(test1))
 
 def heapsort(iterable):
     h = []

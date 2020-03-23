@@ -1,6 +1,77 @@
 # LeetCode Tree
 from tree_library import Node,inorder,levelOrder
 
+# 3/22/2020
+# 654. Maximum Binary Tree
+def constructMaximumBinaryTree(nums):
+
+    #DS used; stack
+    # time complexity O(n)
+
+    stack = []
+    popped = None
+    for num in nums:
+        while stack and stack[-1].val < num:
+            popped = stack.pop()
+
+        root = Node(num)
+
+        # if current root is less than the biggest so far
+        # becomes right child of biggest
+        if stack:
+            stack[-1].right = root
+
+        # if this popped is true, meaning this one has to become left child of root
+        # e,g, 0 has to become left child of 5 as it was originally right child of 6
+        if popped:
+            root.left = popped
+
+        stack.append(root)
+        popped = None
+
+    return levelOrder(stack[0])
+
+
+
+    # max_num = max(nums)
+    # loc = nums.index(max_num)
+    # left, right = nums[:loc], nums[loc+1:]
+    # left_root = right_root = root = Node(max_num)
+    # biggest = max(left)
+    # left.remove(biggest)
+    # left_root.left = Node(biggest)
+    # left_root = left_root.left
+    # while left:
+    #     biggest = max(left)
+    #     left.remove(biggest)
+    #     if biggest < left_root.val:
+    #         left_root.left = Node(biggest)
+    #         left_root = left_root.left
+    #
+    #     else:
+    #         left_root.right = Node(biggest)
+    #         left_root = left_root.right
+    #
+    # Max = max(right)
+    # right.remove(Max)
+    # right_root.right = Node(Max)
+    # right_root = right_root.right
+    # while right:
+    #     Max = max(right)
+    #     right.remove(Max)
+    #     if Max < right_root.val:
+    #         right_root.left = Node(Max)
+    #         right_root = right_root.left
+    #
+    #     else:
+    #         right_root.right = Node(Max)
+    #         right_root = right_root.right
+    #
+    # return levelOrder(root)
+
+test = [3,2,1,6,0,5]
+print(constructMaximumBinaryTree(test))
+
 # 11/13/2019
 class findPath:
 
@@ -378,9 +449,9 @@ def converttoBST(arr):
     return buildBST(arr,0,len(arr)-1)
 
 
-meow = [-10,-3,0,5,9]
-print(converttoBST(meow))
-print(levelOrder(converttoBST(meow)))
+test = [-10,-3,0,5,9]
+print(converttoBST(test))
+print(levelOrder(converttoBST(test)))
 
 # 617. Merge Two Binary Trees
 # how to add None and integer
@@ -551,15 +622,15 @@ def isSameTree(p,q):
     return isSameTree(p.left, q.left) and isSameTree(p.right, q.right)
 
 print('same tree')
-meow = [1,2,1]
-meow1 = [1,1,2]
-meow2 = [1,2,3]
-meow3 = [1,2,3]
-meow4 = [1,2]
-meow5 = [1,None,2]
-print(isSameTree(converttoBST(meow),converttoBST(meow1)))
-print(isSameTree(converttoBST(meow2),converttoBST(meow3)))
-print(isSameTree(converttoBST(meow4),converttoBST(meow5)))
+test = [1,2,1]
+test1 = [1,1,2]
+test2 = [1,2,3]
+test3 = [1,2,3]
+test4 = [1,2]
+test5 = [1,None,2]
+print(isSameTree(converttoBST(test),converttoBST(test1)))
+print(isSameTree(converttoBST(test2),converttoBST(test3)))
+print(isSameTree(converttoBST(test4),converttoBST(test5)))
 
 # 4.3 List of Depths
 """ algorithm
@@ -1129,13 +1200,13 @@ def buildTree(preorder, inorder):
 
     return helper(deque(preorder), 0, len(preorder)-1)
 
-meow = [3, 9, 20, 15, 7]
-meow1 = [9, 3, 15, 20, 7]
-meow2 = [1,2,3]
-meow3 = [3,2,1]
+test = [3, 9, 20, 15, 7]
+test1 = [9, 3, 15, 20, 7]
+test2 = [1,2,3]
+test3 = [3,2,1]
 
-print(levelOrder(buildTree(meow, meow1)))
-print(levelOrder(buildTree(meow2, meow3)))
+print(levelOrder(buildTree(test, test1)))
+print(levelOrder(buildTree(test2, test3)))
 
 
 # 124. Binary Tree Maximum Path Sum

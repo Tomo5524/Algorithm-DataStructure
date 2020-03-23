@@ -43,3 +43,104 @@ def Selectionsort(A):
 
 test = [5,2,4,6,1,3]
 print(Selectionsort(test))
+
+def merge_sort(arr):
+    # time complexity O(nlogn)
+    if len(arr) > 1:  # there is just one element, recursion stops
+        mid = len(arr) // 2  # Finding the mid of the array
+        L = arr[:mid]  # Dividing the array elements
+        R = arr[mid:]  # into 2 halves
+
+        merge_sort(L)  # Sorting the first half
+        merge_sort(R)  # Sorting the second half
+
+        i = j = k = 0
+
+        # swap values based on arr
+        while i < len(L) and j < len(R):
+            if L[i] < R[j]:
+                arr[k] = L[i]
+                i += 1
+            else:
+                arr[k] = R[j]
+                j += 1
+            k += 1
+
+        # Checking if any element was left
+        while i < len(L):
+            arr[k] = L[i]
+            i += 1
+            k += 1
+
+        while j < len(R):
+            arr[k] = R[j]
+            j += 1
+            k += 1
+
+    return arr
+
+
+test = [5,8,2,6,3,7,1,9]
+test1 = [10, 15, 4, 20, 1]
+test2 = [23, 92, 67, 54, 4, 42, 16, 36, 93, 57]
+test3 = [8,5,6,2,7,3]
+
+print("merge")
+print(merge_sort(test))
+print(merge_sort(test1))
+print(merge_sort(test2))
+print(merge_sort(test3))
+print()
+
+
+def Bubble_Sort(nums):
+
+    # time complexity O(n2)
+    for i in range(len(nums)):
+        swap = False
+        for j in range(i+1,len(nums)):
+            if nums[i] > nums[j]:
+                 nums[i],nums[j] = nums[j],nums[i]
+                 swap = True
+
+        if not swap:
+            break
+
+    return nums
+
+test = [5,8,2,6,3,7,1,9]
+test1 = [10, 15, 4, 20, 1]
+test2 = [23, 92, 67, 54, 4, 42, 16, 36, 93, 57]
+test3 = [5,2,4,6,1,3]
+
+print(Bubble_Sort(test))
+print(Bubble_Sort(test1))
+print(Bubble_Sort(test2))
+print(Bubble_Sort(test3))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

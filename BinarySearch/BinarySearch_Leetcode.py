@@ -125,15 +125,15 @@ def ship(weights,d): # time complexity O(NlogW) w is sum of list
     #
     return l
 
-meow = [3,2,1,4,2,4]
+test = [3,2,1,4,2,4]
 days = 3
-meow1 = [1,2,3,4,5,6,7,8,9,10]
+test1 = [1,2,3,4,5,6,7,8,9,10]
 days1 = 5
-meow2 = [1,2,3,1,1]
+test2 = [1,2,3,1,1]
 days2 = 50
-# print(ship(meow,days))
-print(ship(meow1,days1))
-# print(ship(meow2,days2))
+# print(ship(test,days))
+print(ship(test1,days1))
+# print(ship(test2,days2))
 print()
 
 
@@ -254,27 +254,27 @@ def BS_roatate(nums,target):
     return -1
 
 # test cases
-meow = [5, 6, 7, 8, 9, 10,11,23,45,1, 2, 3]
+test = [5, 6, 7, 8, 9, 10,11,23,45,1, 2, 3]
 t = 23
-meow1= [1,3,5]
+test1= [1,3,5]
 t1 = 5
-meow2 = [5,1,3]
+test2 = [5,1,3]
 t2 = 3
-meow3 = [1,3]
+test3 = [1,3]
 t3 = 3
-meow4 = [3,1]
+test4 = [3,1]
 t4 = 1
-meow5 = [4,5,6,7,0,1,2]
+test5 = [4,5,6,7,0,1,2]
 t5 = 4
-meow6= [9,0,1,2,3,4,5,6,7]
+test6= [9,0,1,2,3,4,5,6,7]
 t6 = 9
-print(BS_roatate(meow,t)) # 8
-print(BS_roatate(meow1,t1)) # 2
-print(BS_roatate(meow2,t2)) # 2
-print(BS_roatate(meow3,t3)) # 1
-print(BS_roatate(meow4,t4)) # 1
-print(BS_roatate(meow5,t5)) # 0
-print(BS_roatate(meow6,t6)) # 0
+print(BS_roatate(test,t)) # 8
+print(BS_roatate(test1,t1)) # 2
+print(BS_roatate(test2,t2)) # 2
+print(BS_roatate(test3,t3)) # 1
+print(BS_roatate(test4,t4)) # 1
+print(BS_roatate(test5,t5)) # 0
+print(BS_roatate(test6,t6)) # 0
 print()
 
 # 35. Search Insert Position
@@ -308,22 +308,22 @@ def searchInsert(nums,target):
     # create helper function
     return bs(nums,target,0,len(nums)-1)
 
-meow = [1,3,5]
+test = [1,3,5]
 t = 5
-meow4 = [1,3]
+test4 = [1,3]
 t4 = 3
-meow6 = [1,3,5,6,8]
+test6 = [1,3,5,6,8]
 t6 = 4
-meow7 = [1,3,5,6]
+test7 = [1,3,5,6]
 t7 = 0
-meow8 = [1,3,5,6]
+test8 = [1,3,5,6]
 t8 = 7
 
-# print(searchInsert(meow,t))
-# print(searchInsert(meow4,t4))
-# print(searchInsert(meow6,t6))
-# print(searchInsert(meow7,t7))
-# print(searchInsert(meow8,t8))
+# print(searchInsert(test,t))
+# print(searchInsert(test4,t4))
+# print(searchInsert(test6,t6))
+# print(searchInsert(test7,t7))
+# print(searchInsert(test8,t8))
 # print()
 
 # 153. Find Minimum in Rotated Sorted Array
@@ -399,13 +399,13 @@ def findmin(nums):
 
 print()
 print('findmin')
-meow1 = [3,4,5,1,2] #1
-meow2 = [4,5,6,7,0,1,2] #0
-meow3 = [3,4,5,6,7,8,9,1,2] #
-meow4 = [8,9,1,2,3,4,5,6,7] #
-meow5 = [4,5,1,2,3]
-print(findmin(meow1))
-print(findmin(meow2))
-print(findmin(meow3))
-print(findmin(meow4))
-print(findmin(meow5))
+test1 = [3,4,5,1,2] #1
+test2 = [4,5,6,7,0,1,2] #0
+test3 = [3,4,5,6,7,8,9,1,2] #
+test4 = [8,9,1,2,3,4,5,6,7] #
+test5 = [4,5,1,2,3]
+print(findmin(test1))
+print(findmin(test2))
+print(findmin(test3))
+print(findmin(test4))
+print(findmin(test5))

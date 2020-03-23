@@ -18,7 +18,7 @@ def dailyTemperatures(T):
     res = [0] * len(T)
     for i in range(len(T)-1,-1,-1):
         # if stack exists and top stack is smaller than current temperature, pop the previous
-        # so current warmest tempearture will be on top of stack
+        # so current warmest temperature will be on top of stack
         # duplicates mean it is not warmer so should update stack when running into duplicates
         while stack and T[stack[-1]] <= T[i]:
             stack.pop()
@@ -111,18 +111,18 @@ def maxSlidingWindow(nums,k):
 
 
 print('slid')
-meow = [1,3,1,2,0,5] # [3, 3, 2, 5]
+test = [1,3,1,2,0,5] # [3, 3, 2, 5]
 k = 1
-meow1 = [1,3,-1,-3,5,3,6,7] # [3, 3, 5, 5, 6, 7]
+test1 = [1,3,-1,-3,5,3,6,7] # [3, 3, 5, 5, 6, 7]
 k1 = 3
-meow2 = [4,3,11] # [11]
+test2 = [4,3,11] # [11]
 k2 = 3
-meow3 = []
+test3 = []
 k3 = 0
-print(maxSlidingWindow(meow,k))
-print(maxSlidingWindow(meow1,k1))
-print(maxSlidingWindow(meow2,k2))
-print(maxSlidingWindow(meow3,k3))
+print(maxSlidingWindow(test,k))
+print(maxSlidingWindow(test1,k1))
+print(maxSlidingWindow(test2,k2))
+print(maxSlidingWindow(test3,k3))
 
 
 # 844. Backspace String Compare
@@ -164,21 +164,21 @@ def backspaceCompare(S, T):
 
     return s1 == s2
 
-meow = "y#fo##f"
-meow1 = "y#f#o##f"
-meow2 = "ab#c"
-meow3 = "ad#c"
-meow4 = "ab##"
-meow5= "c#d#"
-meow6 = "a##c"
-meow7 = "#a#c"
-meow8 = "a#c"
-meow9 = "b"
-print(backspaceCompare(meow,meow1))
-print(backspaceCompare(meow2,meow3))
-print(backspaceCompare(meow4,meow5))
-print(backspaceCompare(meow6,meow7))
-print(backspaceCompare(meow8,meow9))
+test = "y#fo##f"
+test1 = "y#f#o##f"
+test2 = "ab#c"
+test3 = "ad#c"
+test4 = "ab##"
+test5= "c#d#"
+test6 = "a##c"
+test7 = "#a#c"
+test8 = "a#c"
+test9 = "b"
+print(backspaceCompare(test,test1))
+print(backspaceCompare(test2,test3))
+print(backspaceCompare(test4,test5))
+print(backspaceCompare(test6,test7))
+print(backspaceCompare(test8,test9))
 
 # 232. Implement Queue using Stacks
 
@@ -427,10 +427,10 @@ def calPoints(points):
 
     return sum(stack)
 
-meow =  ["5","2","C","D","+"]
-meow1 = ["5","-2","4","C","D","9","+","+"]
-print(calPoints(meow))
-print(calPoints(meow1))
+test =  ["5","2","C","D","+"]
+test1 = ["5","-2","4","C","D","9","+","+"]
+print(calPoints(test))
+print(calPoints(test1))
 
 # 1021. Remove Outermost Parentheses
 def removeOuterParentheses(s):
@@ -457,12 +457,12 @@ def removeOuterParentheses(s):
 
     return res
 
-meow = "(()())(())"
-meow1 = "(()())(())(()(()))"
-meow2 = "()()" # no parenthesises are inside of each parenthesis so remove outermost parenthesis
-print(removeOuterParentheses(meow))
-print(removeOuterParentheses(meow1))
-print(removeOuterParentheses(meow2))
+test = "(()())(())"
+test1 = "(()())(())(()(()))"
+test2 = "()()" # no parenthesises are inside of each parenthesis so remove outermost parenthesis
+print(removeOuterParentheses(test))
+print(removeOuterParentheses(test1))
+print(removeOuterParentheses(test2))
 
 
 
@@ -584,14 +584,14 @@ def maxKsubarray(arr,k):
     res.append(arr[q[0]])
     return res
 
-meow = [10,5,2,7,8,7] # [10, 7, 8, 8]
-meow1 = [5,10,2,7,8,7] # [10, 10, 8, 8]
-meow2 = [1,2,3,4,5,6] # [3, 4, 5, 6]
-meow3 = [6,5,4,3,2,1] # [6, 5, 4, 3]
-print(maxKsubarray(meow,3))
-print(maxKsubarray(meow1,3))
-print(maxKsubarray(meow2,3))
-print(maxKsubarray(meow3,3))
+test = [10,5,2,7,8,7] # [10, 7, 8, 8]
+test1 = [5,10,2,7,8,7] # [10, 10, 8, 8]
+test2 = [1,2,3,4,5,6] # [3, 4, 5, 6]
+test3 = [6,5,4,3,2,1] # [6, 5, 4, 3]
+print(maxKsubarray(test,3))
+print(maxKsubarray(test1,3))
+print(maxKsubarray(test2,3))
+print(maxKsubarray(test3,3))
 
 # Leetcode 20. Valid Parentheses
 
@@ -639,18 +639,18 @@ def ValidParentheses(p):
 ##            
 ##    return False if stack else True
     
-meow = ""
-meow1 = "(){}[]"
-meow2 = "(]"
-meow3 = "({})"
-meow4 = "(])"
-meow5 ="){"
-meow6 ="]"
+test = ""
+test1 = "(){}[]"
+test2 = "(]"
+test3 = "({})"
+test4 = "(])"
+test5 ="){"
+test6 ="]"
 
-print(ValidParentheses(meow))
-print(ValidParentheses(meow1))
-print(ValidParentheses(meow2))
-print(ValidParentheses(meow3))
-print(ValidParentheses(meow4))
-print(ValidParentheses(meow5))
-print(ValidParentheses(meow6))
+print(ValidParentheses(test))
+print(ValidParentheses(test1))
+print(ValidParentheses(test2))
+print(ValidParentheses(test3))
+print(ValidParentheses(test4))
+print(ValidParentheses(test5))
+print(ValidParentheses(test6))
