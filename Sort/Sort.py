@@ -49,7 +49,7 @@ print()
 # insert
 
 def insertion_sort(arr):
-    # time complexity O(n)
+    # time complexity O(nlogn)
     # always compare current index to the one index before current one
     # start from index 1 to compare current index and one idx before
     for i in range(1,len(arr)):
