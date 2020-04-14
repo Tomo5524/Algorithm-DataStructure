@@ -478,7 +478,7 @@ print(QueenBoard(board))
 
 # A rat in a maze
 
-# the only can move down and right 
+# the only can move down and right   
 
 def wayOutForRat(maze):
 
