@@ -1,6 +1,69 @@
 # LeetCode Tree
 from tree_library import Node,inorder,levelOrder
 
+# 4/22/2020
+def findTarget(root, k):
+    """
+    algorithm
+    1, deconstruct tree and create array off of it
+    2, apply 2 sum algorithm
+    """
+
+    stack = []
+    res = []
+
+    while stack or root:
+        while root:
+            stack.append(root)
+            root = root.left
+
+        popped = stack.pop()
+        res.append(popped.val)
+        root = popped.right
+
+    #time complexity O(n)
+    dic = {}
+    for i in range(len(res)):
+        if res[i] in dic:
+            return True
+        else:
+            dic[k-res[i]] = i
+
+    return False
+
+    # brute force
+    # if len(res) < 1:
+    #     return False
+    # for i in range(len(res)):
+    #     num = i
+    #     for j in range(i + 1, len(res)):
+    #         if res[i] + res[j] == k:
+    #             return True
+    #
+    # return False
+
+root = Node(2)
+root.left = Node(1)
+root.right = Node(3)
+print(findTarget(root,4))
+
+root2 = Node(5)
+root2.left = Node(3)
+root2.right = Node(6)
+root2.left.left = Node(2)
+root2.left.right = Node(4)
+root2.right.right = Node(7)
+print(findTarget(root2,9))
+
+root3 = Node(5)
+root3.left = Node(3)
+root3.right = Node(6)
+root3.left.left = Node(2)
+root3.left.right = Node(4)
+root3.right.right = Node(7)
+print(findTarget(root3,27))
+
+
 # 3/22/2020
 # 654. Maximum Binary Tree
 def constructMaximumBinaryTree(nums):
