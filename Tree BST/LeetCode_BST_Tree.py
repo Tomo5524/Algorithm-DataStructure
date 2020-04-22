@@ -2,34 +2,54 @@
 from tree_library import Node,inorder,levelOrder
 
 # 4/22/2020
-def findTarget(root, k):
-    """
-    algorithm
-    1, deconstruct tree and create array off of it
-    2, apply 2 sum algorithm
-    """
+# 653. Two Sum IV - Input is a BST
+class a:
+    def findTarget(self,root, k):
+        """
+        algorithm
+        1, deconstruct tree and create array off of it
+        2, apply 2 sum algorithm
+        """
 
-    stack = []
-    res = []
+        def dfs(self,root):
+            if not root: return
+            if root.val in self.hashset:
+                return True
+            self.hashset.add(k - root.val)
 
-    while stack or root:
-        while root:
-            stack.append(root)
-            root = root.left
+            return dfs(self,root.left) or dfs(self,root.right)
 
-        popped = stack.pop()
-        res.append(popped.val)
-        root = popped.right
+        self.hashset = set()
+        return True if dfs(self,root) else False
 
-    #time complexity O(n)
-    dic = {}
-    for i in range(len(res)):
-        if res[i] in dic:
-            return True
-        else:
-            dic[k-res[i]] = i
-
-    return False
+# def findTarget(self, root, k):
+#     """
+#         algorithm
+#         1, deconstruct tree and create array off of it
+#         2, apply 2 sum algorithm
+#         """
+#
+#     stack = []
+#     res = []
+#
+#     while stack or root:
+#         while root:
+#             stack.append(root)
+#             root = root.left
+#
+#         popped = stack.pop()
+#         res.append(popped.val)
+#         root = popped.right
+#
+#     # time complexity O(n)
+#     dic = {}
+#     for i in range(len(res)):
+#         if res[i] in dic:
+#             return True
+#         else:
+#             dic[k - res[i]] = i
+#
+#     return False
 
     # brute force
     # if len(res) < 1:
@@ -42,26 +62,29 @@ def findTarget(root, k):
     #
     # return False
 
+b = a()
 root = Node(2)
 root.left = Node(1)
 root.right = Node(3)
-print(findTarget(root,4))
+print(b.findTarget(root,4))
 
+c = a()
 root2 = Node(5)
 root2.left = Node(3)
 root2.right = Node(6)
 root2.left.left = Node(2)
 root2.left.right = Node(4)
 root2.right.right = Node(7)
-print(findTarget(root2,9))
+print(c.findTarget(root2,9))
 
+d = a()
 root3 = Node(5)
 root3.left = Node(3)
 root3.right = Node(6)
 root3.left.left = Node(2)
 root3.left.right = Node(4)
 root3.right.right = Node(7)
-print(findTarget(root3,27))
+print(d.findTarget(root3,27))
 
 
 # 3/22/2020
