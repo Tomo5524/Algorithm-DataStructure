@@ -1,4 +1,33 @@
 
+
+# 763. Partition Labels
+def partitionLabels(S):
+
+    stack = [[]]
+    s = ''
+    for i in range(len(S)):
+        if stack[-1]:
+            if S[i] not in stack[-1][-1]:
+                stack[-1][-1] += S[i]
+
+            else:
+                popped = stack.pop()
+                stack.append([popped[-1] + S[i]])
+
+        else:
+            stack[-1].append(S[i])
+
+    res = []
+    for num in stack:
+        res.append(len(num))
+
+    return res
+
+S = "ababcbacadefegdehijhklij"
+print(partitionLabels(S))
+
+
+
 # 11/30/2019
 # 1. Two Sum
 def twoSum(nums, target):
