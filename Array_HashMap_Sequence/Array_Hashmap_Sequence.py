@@ -1,4 +1,21 @@
+from collections import deque
 
+def deckRevealedIncreasing(deck):
+    idx = deque(range(len(deck)))
+    res = [0] * len(deck)
+
+    for card in sorted(deck):
+        cur_idx = idx.popleft()
+        res[cur_idx] = card
+        if idx:
+            idx.append(idx.popleft())
+
+    return res
+
+test = [17,13,11,2,3,5,7]
+test1 = [1,2,3,4,5,6]
+test2 = [5,1,2,6,3,7,4,8]
+print(deckRevealedIncreasing(test))
 
 # 763. Partition Labels
 def partitionLabels(S):
@@ -23,6 +40,7 @@ def partitionLabels(S):
 
     return res
 
+print()
 S = "ababcbacadefegdehijhklij"
 print(partitionLabels(S))
 
