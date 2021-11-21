@@ -187,8 +187,10 @@ print()
 def Bubble_Sort(nums):
 
     # time complexity O(n2)
+    # going through the list as many times as there are elements
     for i in range(len(nums)):
         swap = False
+        # from index 0 to index i is sorted so no need to revisit those values
         for j in range(i+1,len(nums)):
             if nums[i] > nums[j]:
                  nums[i],nums[j] = nums[j],nums[i]
