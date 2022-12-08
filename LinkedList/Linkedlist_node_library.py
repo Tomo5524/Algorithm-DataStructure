@@ -37,14 +37,16 @@ def reverse(head):
 # """
 #
 #     # base case
-#     if not head or not head.next:
-#         return head
-#
-#     node = reverse(head.next)
-#     head.next.next = node
+#     if not head:
+#         return None
+#     
+#     newHead = head
+#     if head.next:
+#         newHead = reverse(head.next)
+#         head.next.next = head
 #     head.next = None
 #
-#     return node
+#     return newHead
     
 
     
