@@ -48,11 +48,12 @@ def reverse(head):
 #
 #     return newHead
     
-
-    
-
-
-
+# head = Node(-10)
+# head.next = Node(-3)
+# head.next.next = Node(0)
+# head.next.next.next = Node(5)
+# head.next.next.next.next = Node(9)
+# print(reverse(head))
 
 ##from collections import deque
 ##class Node:
