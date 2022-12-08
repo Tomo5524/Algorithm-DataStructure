@@ -31,8 +31,9 @@ def reverse(head):
 # #def recursion_reverse(head):
 #     """ algorithm
 #         1, iterate all the way down, stop at the last val by 'if head.next'
-#         2, pointer points to itself by head.next.next = head
-#         3, kill hea
+#         2, headNode persists throughout recursion meaning it alwasy points to the last node
+#         3, head.next = None deletes current node's pointer but in next recursion, head.next points to the next node whose pointer was jsut deleted by
+#            head.next = None so we need to add a new pointer by head.next.next = head
 #
 # """
 #
@@ -42,8 +43,11 @@ def reverse(head):
 #     
 #     newHead = head
 #     if head.next:
+#         # newHead always points to the last node. 
 #         newHead = reverse(head.next)
+#         # head.next is the next node. so we move the next node's pointer (head.next.next) to the head itself
 #         head.next.next = head
+#     # delete current node's next pointer that was previous pointed to the next node in an ascending order.
 #     head.next = None
 #
 #     return newHead
